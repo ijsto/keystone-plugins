@@ -35,6 +35,5 @@ jobs:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
           publish: yarn release
         env:
-          # TODO: Review - GITHUB_TOKEN - Outdated?
-          # GITHUB_TOKEN: ${{ secrets.KEYSTONE_AUTH_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_ACTION_KS_CHANGESET_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
