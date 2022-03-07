@@ -26,7 +26,7 @@ jobs:
 
       - name: 👩🏼‍🚀 Install Dependencies
         # we have a postinstall script that uses is-ci which doesn't yet detect GitHub Actions
-        run: CI=true yarn
+        run: CI=true pnpm install
 
       - name: 🚀 Release V and Publish to NPM
         id: changesets
