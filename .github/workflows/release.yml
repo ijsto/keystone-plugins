@@ -33,7 +33,10 @@ jobs:
         uses: changesets/action@v1
         with:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: yarn release
+          publish: pnpm release
+          version: pnpm version-packages
+          commit: "chore: version packages"
+          title: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACTION_KS_CHANGESET_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.KS_OAUTH_GH_CHANGESET_PUBLISH }}
