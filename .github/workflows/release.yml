@@ -12,17 +12,16 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pnpm:
+          - 6.32.3
     steps:
       - name: 🌚 Checkout Repo
         uses: actions/checkout@master
         with:
           fetch-depth: 0
           persist-credentials: false
-
-      strategy:
-        matrix:
-          pnpm:
-            - 6.32.3
 
       - name: 🟢 Setup Node.js 14.x
         uses: actions/setup-node@master
