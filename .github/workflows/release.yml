@@ -21,6 +21,7 @@ jobs:
 
       - name: 📦 Setup PNPM Manager
         uses: pnpm/action-setup@v2.2.1
+        version: v2.2.1
 
       - name: 🟢 Setup Node.js 14.x
         uses: actions/setup-node@master
