@@ -12,10 +12,6 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        pnpm:
-          - 6.32.3
     steps:
       - name: 🌚 Checkout Repo
         uses: actions/checkout@master
@@ -30,15 +26,15 @@ jobs:
 
       - name: 👩🏼‍🚀 Install Dependencies
         # we have a postinstall script that uses is-ci which doesn't yet detect GitHub Actions
-        run: CI=true pnpm install
+        run: CI=true yarn
 
       - name: 🚀 Release V and Publish to NPM
         id: changesets
         uses: changesets/action@v1
         with:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: pnpm release
-          version: pnpm version-packages
+          publish: yarn release
+          version: yarn version
           commit: "chore: version packages"
           title: "chore: version packages"
         env:
