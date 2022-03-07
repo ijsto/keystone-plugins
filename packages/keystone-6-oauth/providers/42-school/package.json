@@ -1,0 +1,4 @@
+{
+  "main": "dist/keystone-6-oauth-providers-42-school.cjs.js",
+  "module": "dist/keystone-6-oauth-providers-42-school.esm.js"
+}

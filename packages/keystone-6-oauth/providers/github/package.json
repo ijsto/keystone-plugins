@@ -1,0 +1,4 @@
+{
+  "main": "dist/keystone-6-oauth-providers-github.cjs.js",
+  "module": "dist/keystone-6-oauth-providers-github.esm.js"
+}

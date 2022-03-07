@@ -1,0 +1,40 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Release and NPM Publish
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the "main" branch
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🌚 Checkout Repo
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: 🟢 Setup Node.js 14.x
+        uses: actions/setup-node@master
+        with:
+          node-version: 14.x
+
+      - name: 👩🏼‍🚀 Install Dependencies
+        # we have a postinstall script that uses is-ci which doesn't yet detect GitHub Actions
+        run: CI=true yarn
+
+      - name: 🚀 Release V and Publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: yarn release
+        env:
+          # TODO: Review - GITHUB_TOKEN - Outdated?
+          # GITHUB_TOKEN: ${{ secrets.KEYSTONE_AUTH_GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

@@ -1,0 +1,4 @@
+{
+  "main": "dist/keystone-6-oauth-providers-naver.cjs.js",
+  "module": "dist/keystone-6-oauth-providers-naver.esm.js"
+}

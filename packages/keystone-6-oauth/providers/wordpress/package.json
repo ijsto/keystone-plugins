@@ -1,0 +1,4 @@
+{
+  "main": "dist/keystone-6-oauth-providers-wordpress.cjs.js",
+  "module": "dist/keystone-6-oauth-providers-wordpress.esm.js"
+}

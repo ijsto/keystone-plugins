@@ -1,0 +1,4 @@
+{
+  "main": "dist/keystone-6-oauth-providers-fusionauth.cjs.js",
+  "module": "dist/keystone-6-oauth-providers-fusionauth.esm.js"
+}

@@ -1,0 +1,16 @@
+import getNextAuthPage from 'keystone-6-oauth/pages/NextAuthPage';
+import { nextAuthProviders as Providers } from 'keystone-6-oauth';
+
+export default getNextAuthPage({
+        identityField: '<%= identityField %>',
+        mutationName: '<%= gqlNames.authenticateItemWithPassword %>',
+        providers:[ <% providers.forEach(provider => { %>
+            Providers.<%= provider.name %>({
+                <% const providerConf = provider.config;
+                for (const key in providerConf) { %>
+                    <%= key %>: '<%= providerConf[key] %>',
+                <%}%>
+                }),
+        <% }) %>
+        ],
+    });

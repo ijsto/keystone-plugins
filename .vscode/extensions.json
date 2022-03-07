@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "iJS.reactnextjssnippets",
+    "formulahendry.auto-rename-tag",
+  ]
+}

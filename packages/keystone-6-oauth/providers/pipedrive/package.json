@@ -1,0 +1,4 @@
+{
+  "main": "dist/keystone-6-oauth-providers-pipedrive.cjs.js",
+  "module": "dist/keystone-6-oauth-providers-pipedrive.esm.js"
+}
