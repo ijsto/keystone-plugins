@@ -7,6 +7,7 @@
   "workspaces": [
     "packages/*",
     "services/*",
+    "docs/*",
     "apps/*",
     "examples/*",
     "website",
@@ -16,13 +17,14 @@
     "build": "preconstruct build",
     "build:backend": "manypkg run backend build",
     "clean": "manypkg exec rm -rf node_modules && manypkg exec rm -rf .keystone && manypkg exec rm -rf dist && manypkg exec rm -rf .next && rm -rf node_modules",
-    "dev": "yarn dev:backend",
-    "dev:backend": "manypkg run backend dev",
+    "dev": "turbo run dev --parallel",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
     "postinstall": "preconstruct dev && manypkg check",
     "lint": "yarn eslint .",
     "release": "yarn build && changeset publish",
     "version": "changeset version",
-    "start": "echo TODO: @ScottAgirs https://github.com/ijsto/keystone-plugins/projects/4#card-78694238",
     "start:backend": "manypkg run backend start",
     "start:next": "yarn manypkg run next-app start",
     "test": "jest"
@@ -79,5 +81,8 @@
       "packages/*",
       "services/*"
     ]
+  },
+  "devDependencies": {
+    "turbo": "^1.1.7"
   }
 }
