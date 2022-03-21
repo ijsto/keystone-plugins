@@ -48,7 +48,6 @@ export default function NextAuthPage(props: NextAuthPageProps) {
           identity = 0;
         }
         const userInput = await resolver({ user, account, profile, ...rest });
-        console.log('signIn :: userInput', userInput);
 
         const result = await validateNextAuth(
           identityField,
