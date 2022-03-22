@@ -6,27 +6,15 @@
   "license": "MIT",
   "workspaces": [
     "packages/*",
-    "services/*",
     "docs/*",
-    "apps/*",
-    "examples/*",
-    "website",
-    "backend"
+    "apps/*"
   ],
   "scripts": {
     "build": "preconstruct build",
-    "build:backend": "manypkg run backend build",
-    "clean": "manypkg exec rm -rf node_modules && manypkg exec rm -rf .keystone && manypkg exec rm -rf dist && manypkg exec rm -rf .next && rm -rf node_modules",
     "dev": "turbo run dev --parallel",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs",
-    "postinstall": "preconstruct dev && manypkg check",
-    "lint": "yarn eslint .",
+    "postinstall": "preconstruct dev",
     "release": "yarn build && changeset publish",
     "version": "changeset version",
-    "start:backend": "manypkg run backend start",
-    "start:next": "yarn manypkg run next-app start",
     "test": "jest"
   },
   "dependencies": {
@@ -43,7 +31,6 @@
     "@changesets/changelog-github": "^0.4.2",
     "@changesets/cli": "^2.20.0",
     "@jest/test-sequencer": "^26.6.3",
-    "@manypkg/cli": "^0.19.1",
     "@preconstruct/cli": "2.1.5",
     "@preconstruct/eslint-plugin-format-js-tag": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.1",
@@ -78,8 +65,7 @@
   },
   "preconstruct": {
     "packages": [
-      "packages/*",
-      "services/*"
+      "packages/*"
     ]
   },
   "devDependencies": {
