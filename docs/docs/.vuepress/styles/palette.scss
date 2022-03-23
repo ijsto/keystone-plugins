@@ -1,0 +1,23 @@
+:root {
+  --c-brand: #b838f0;
+  --c-brand-light: #d994f7;
+  --c-bg: #f7f7f7;
+  --code-bg-color: #333643;
+  --c-text: #323542;
+  --font-family: "Spartan", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+}
+
+html.dark {
+  --c-bg: #27273f;
+  --c-text: #c4d9f0;
+  --c-brand: #63bdf3;
+  --c-brand-light: #95d0f5;
+}
+html.light {
+  --c-bg: #f7f7f7;
+  --c-text: #323542;
+  --c-brand: #b838f0;
+  --c-brand-light: #c674e9;
+}

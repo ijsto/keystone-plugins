@@ -1,29 +1,17 @@
 {
   "name": "docs",
   "version": "0.0.0",
-  "description": "Keystone-6 OAuth plugin Docs & Guides",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "serve": "vitepress serve docs",
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ijsto/keystone-plugins.git"
-  },
-  "keywords": [
-    "keystone",
-    "keystone-6",
-    "keystone-plugin",
-    "keystone-auth",
-    "oauth",
-    "next-auth"
-  ],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ijsto/keystone-plugins/issues"
-  },
-  "homepage": "https://github.com/ijsto/keystone-plugins#readme"
+  "devDependencies": {
+    "@vuepress/bundler-vite": "^2.0.0-beta.36",
+    "vuepress": "^2.0.0-beta.36"
+  }
 }
