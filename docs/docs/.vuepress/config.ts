@@ -70,7 +70,7 @@ export default defineUserConfig<DefaultThemeOptions>({
 
     repo: "ijsto/keystone-plugins",
 
-    docsDir: "docs",
+    docsDir: "docs/docs",
 
     // theme-level locales config
     locales: {
