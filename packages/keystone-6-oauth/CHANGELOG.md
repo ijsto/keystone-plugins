@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.9
+
+### Patch Changes
+
+- 687fad3: Improve typings
+
 ## 0.0.8
 
 ### Patch Changes
