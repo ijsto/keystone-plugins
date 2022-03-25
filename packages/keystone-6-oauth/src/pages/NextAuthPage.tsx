@@ -66,7 +66,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
         );
         // ID
         const data: any = {
-          // TODO: https://github.com/ijsto/keystone-6-oauth/projects/1#card-78601954
+          // TODO: - https://github.com/ijsto/keystone-6-oauth/projects/1#card-78601954
           [identityField]: identity,
           ...userInput,
         };
