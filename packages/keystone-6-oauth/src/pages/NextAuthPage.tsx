@@ -62,22 +62,22 @@ export default function NextAuthPage(props: NextAuthPageProps) {
   return NextAuth({
     events: {
       async signIn(message) { 
-        console.log("on successful sign in */", message);
+        console.log("on successful sign in */");
       },
       async signOut(message) { 
-        console.log("on signout */", message);
+        console.log("on signout */");
       },
       async createUser(message) { 
-        console.log("/* user created */", message);
+        console.log("/* user created */");
       },
       async updateUser(message) { 
-        console.log("/* user updated - e.g. their email was verified */", message);
+        console.log("/* user updated - e.g. their email was verified */");
       },
       async linkAccount(message) { 
-        console.log("/* account (e.g. Twitter) linked to a user */", message);
+        console.log("/* account (e.g. Twitter) linked to a user */");
       },
       async session(message) { 
-        console.log("/* session is active */", message);
+        console.log("/* session is active */");
       },
     },
     jwt,
