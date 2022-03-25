@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.7
+
+### Patch Changes
+
+- c23be80: [nts] WIP: Setting up
+
 ## 0.0.6
 
 ### Patch Changes
