@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.8
+
+### Patch Changes
+
+- 0b9527d: more graphql to peerdeps
+
 ## 0.0.7
 
 ### Patch Changes
