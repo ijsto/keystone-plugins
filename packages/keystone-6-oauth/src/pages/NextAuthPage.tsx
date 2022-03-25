@@ -1,30 +1,36 @@
-import NextAuth from 'next-auth';
+import NextAuth, { EventCallbacks, PagesOptions } from 'next-auth';
 import type { KeystoneListsAPI } from '@keystone-6/core/types';
 import { Provider } from 'next-auth/providers';
 import { validateNextAuth } from '../lib/validateNextAuth';
+import { JWTOptions } from 'next-auth/jwt';
 
 // Need to bring in correct props
 type NextAuthPageProps = {
   identityField: string;
+  jwt?: Partial<JWTOptions>;
   mutationName: string;
   providers: Provider[];
   query: KeystoneListsAPI<any>;
   sessionData: string;
   listKey: string;
   autoCreate: boolean;
-  sessionSecret: string;
+  events?: Partial<EventCallbacks>;
+  pages?: Partial<PagesOptions>;
   resolver: Function;
+  sessionSecret: string;
 };
 
 export default function NextAuthPage(props: NextAuthPageProps) {
   const {
+    events,
     providers,
     query,
     identityField,
+    jwt,
     sessionData,
     listKey,
     autoCreate,
-    // Can we do this?
+    pages,
     resolver,
     sessionSecret,
   } = props;
@@ -35,8 +41,11 @@ export default function NextAuthPage(props: NextAuthPageProps) {
   const protectIdentities = true;
 
   return NextAuth({
-    secret: sessionSecret,
+    events,
+    jwt,
+    pages,
     providers,
+    secret: sessionSecret,
     callbacks: {
       async signIn({ user, account, profile, ...rest }) {
         let identity;
