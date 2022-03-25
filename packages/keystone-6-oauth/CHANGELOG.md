@@ -1,5 +1,14 @@
 # keystone-6-oauth
 
+## 0.0.4
+
+### Patch Changes
+
+- 73f4d1f: Sync changesets and npx v
+- fba3b61: last next version
+- ac08c1f: Sync Versions
+- 623e1a1: Add NextAuth option bridges
+
 ## 0.0.3
 
 ### Patch Changes
