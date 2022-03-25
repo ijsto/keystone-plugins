@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.10
+
+### Patch Changes
+
+- cd66d36: Testing events implementation
+
 ## 0.0.9
 
 ### Patch Changes
