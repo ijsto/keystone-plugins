@@ -21,7 +21,7 @@ import { nextConfigTemplate } from "./templates/next-config";
 import {
   AuthConfig,
   AuthGqlNames,
-  KeystoneAuthConfig,
+  KeystoneOAuthConfig,
   NextAuthSession,
 } from "./types";
 import { getSchemaExtension } from "./schema";
@@ -33,15 +33,16 @@ import { authTemplate } from "./templates/auth";
  * Generates config for Keystone to implement standard auth features.
  */
 
-export type { NextAuthProviders, KeystoneAuthConfig } from "./types";
+export type { NextAuthProviders, KeystoneOAuthConfig } from "./types";
 export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
-  listKey,
-  identityField,
-  sessionData,
   autoCreate,
-  resolver,
+  identityField,
+  listKey,
   keystonePath,
+  pages,
+  resolver,
   providers,
+  sessionData,
   sessionSecret,
 }: AuthConfig<GeneratedListTypes>) {
   // The protectIdentities flag is currently under review to see whether it should be
@@ -107,11 +108,12 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
         outputPath: "pages/api/auth/[...nextauth].js",
         src: authTemplate({
           gqlNames,
-          identityField,
-          sessionData,
-          listKey,
           autoCreate,
+          identityField,
+          listKey,
+          pages,
           resolver,
+          sessionData,
           sessionSecret,
         }),
       },
@@ -246,7 +248,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
    * It validates the auth config against the provided keystone config, and preserves existing
    * config by composing existing extendGraphqlSchema functions and ui config.
    */
-  const withAuth = (keystoneConfig: KeystoneConfig): KeystoneAuthConfig => {
+  const withAuth = (keystoneConfig: KeystoneConfig): KeystoneOAuthConfig => {
     validateConfig(keystoneConfig);
     let { ui } = keystoneConfig;
     if (keystoneConfig.ui) {
@@ -301,9 +303,10 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     return {
       ...keystoneConfig,
       ui,
-      session,
       providers,
+      pages,
       resolver,
+      session,
       lists: {
         ...keystoneConfig.lists,
       },

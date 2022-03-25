@@ -4,38 +4,55 @@ import { Provider } from 'next-auth/providers';
 import { validateNextAuth } from '../lib/validateNextAuth';
 import { JWTOptions } from 'next-auth/jwt';
 
-// Need to bring in correct props
-type NextAuthPageProps = {
-  identityField: string;
-  jwt?: Partial<JWTOptions>;
-  mutationName: string;
-  providers: Provider[];
-  query: KeystoneListsAPI<any>;
-  sessionData: string;
-  listKey: string;
+// TODO: See if possible to merge with `type AuthConfig`
+type CoreNextAuthPageProps = {
   autoCreate: boolean;
   events?: Partial<EventCallbacks>;
+  identityField: string;
+  jwt?: Partial<JWTOptions>;
+  listKey: string;
   pages?: Partial<PagesOptions>;
-  resolver: Function;
+  providers?: Provider[];
+  resolver: Function | undefined;
+  sessionData: string | undefined;
   sessionSecret: string;
-};
+}
+
+type NextAuthGglProps = {
+  mutationName?: string;
+  query?: KeystoneListsAPI<any>;
+}
+
+export type NextAuthPageProps = CoreNextAuthPageProps & NextAuthGglProps;
 
 export default function NextAuthPage(props: NextAuthPageProps) {
   const {
+    autoCreate,
     events,
-    providers,
-    query,
     identityField,
     jwt,
-    sessionData,
     listKey,
-    autoCreate,
     pages,
+    providers,
+    query,
     resolver,
+    sessionData,
     sessionSecret,
   } = props;
   // TODO: (v1.1). https://github.com/ijsto/keystone-6-oauth/projects/1#card-78602004
 
+  if (!query) {
+    // TODO: [Review] - can query be null?
+    console.error("NextAuthPage got no query.")
+    return null;
+  }
+
+  if (!providers || !providers.length) {
+    // TODO: [Docs] Add providers instructions
+    console.error("You need to provide at least one provider.")
+    return null;
+  }
+  
   const list = query[listKey];
   const queryAPI = query[listKey];
   const protectIdentities = true;
@@ -56,7 +73,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
         } else {
           identity = 0;
         }
-        const userInput = await resolver({ user, account, profile, ...rest });
+        const userInput = resolver ? await resolver({ user, account, profile, ...rest }) : {};
 
         const result = await validateNextAuth(
           identityField,
