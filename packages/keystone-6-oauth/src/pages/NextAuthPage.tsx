@@ -39,6 +39,8 @@ export default function NextAuthPage(props: NextAuthPageProps) {
     sessionData,
     sessionSecret,
   } = props;
+  console.log('NextAuthPage :: pages', pages);
+  console.log('NextAuthPage :: events', events);
   // TODO: (v1.1). https://github.com/ijsto/keystone-6-oauth/projects/1#card-78602004
 
   if (!query) {
@@ -58,7 +60,26 @@ export default function NextAuthPage(props: NextAuthPageProps) {
   const protectIdentities = true;
 
   return NextAuth({
-    events,
+    events: {
+      async signIn(message) { 
+        console.log("on successful sign in */", message);
+      },
+      async signOut(message) { 
+        console.log("on signout */", message);
+      },
+      async createUser(message) { 
+        console.log("/* user created */", message);
+      },
+      async updateUser(message) { 
+        console.log("/* user updated - e.g. their email was verified */", message);
+      },
+      async linkAccount(message) { 
+        console.log("/* account (e.g. Twitter) linked to a user */", message);
+      },
+      async session(message) { 
+        console.log("/* session is active */", message);
+      },
+    },
     jwt,
     pages,
     providers,
