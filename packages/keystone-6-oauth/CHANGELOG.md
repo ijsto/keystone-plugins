@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.5
+
+### Patch Changes
+
+- 878707b: Nothing to see - minor cleanup
+
 ## 0.0.4
 
 ### Patch Changes
