@@ -34,7 +34,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
     resolver,
     sessionSecret,
   } = props;
-  // TODO: (v1.1.0). https://github.com/ijsto/keystone-6-oauth/projects/1#card-78602004
+  // TODO: (v1.1). https://github.com/ijsto/keystone-6-oauth/projects/1#card-78602004
 
   const list = query[listKey];
   const queryAPI = query[listKey];
