@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.6
+
+### Patch Changes
+
+- 540846e: Chore update v in comment
+
 ## 0.0.5
 
 ### Patch Changes
