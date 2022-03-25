@@ -1,4 +1,4 @@
-import url from 'url';
+import url from "url";
 import {
   AdminFileToWrite,
   BaseListTypeInfo,
@@ -7,10 +7,15 @@ import {
   AdminUIConfig,
   SessionStrategy,
   BaseKeystoneTypeInfo,
-} from '@keystone-6/core/types';
-import { getSession } from 'next-auth/react';
-import * as cookie from 'cookie';
-import { nextConfigTemplate } from './templates/next-config';
+} from "@keystone-6/core/types";
+import { NextApiRequest } from "next";
+import { getSession } from "next-auth/react";
+import { getToken } from "next-auth/jwt";
+import { Provider } from "next-auth/providers";
+
+import * as cookie from "cookie";
+
+import { nextConfigTemplate } from "./templates/next-config";
 // import * as Path from 'path';
 
 import {
@@ -18,9 +23,9 @@ import {
   AuthGqlNames,
   KeystoneAuthConfig,
   NextAuthSession,
-} from './types';
-import { getSchemaExtension } from './schema';
-import { authTemplate } from './templates/auth';
+} from "./types";
+import { getSchemaExtension } from "./schema";
+import { authTemplate } from "./templates/auth";
 
 /**
  * createAuth function
@@ -28,7 +33,7 @@ import { authTemplate } from './templates/auth';
  * Generates config for Keystone to implement standard auth features.
  */
 
-export type { NextAuthProviders, KeystoneAuthConfig } from './types';
+export type { NextAuthProviders, KeystoneAuthConfig } from "./types";
 export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   listKey,
   identityField,
@@ -54,7 +59,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     createInitialItem: `createInitial${listKey}`,
   };
 
-  const customPath = !keystonePath || keystonePath === '/' ? '' : keystonePath;
+  const customPath = !keystonePath || keystonePath === "/" ? "" : keystonePath;
   /**
    * pageMiddleware
    *
@@ -65,7 +70,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
    *  - to the init page when initFirstItem is configured, and there are no user in the database
    *  - to the signin page when no valid session is present
    */
-  const pageMiddleware: AdminUIConfig<BaseKeystoneTypeInfo>['pageMiddleware'] =
+  const pageMiddleware: AdminUIConfig<BaseKeystoneTypeInfo>["pageMiddleware"] =
     async ({ context, isValidSession }) => {
       const { req, session } = context;
       const pathname = url.parse(req?.url!).pathname!;
@@ -74,16 +79,16 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
       }
       if (isValidSession) {
         if (pathname === `${customPath}/api/auth/signin`) {
-          return { kind: 'redirect', to: `${customPath}` };
+          return { kind: "redirect", to: `${customPath}` };
         }
-        if (customPath !== '' && pathname === '/') {
-          return { kind: 'redirect', to: `${customPath}` };
+        if (customPath !== "" && pathname === "/") {
+          return { kind: "redirect", to: `${customPath}` };
         }
         return;
       }
 
       if (!session && !pathname.includes(`${customPath}/api/auth/`)) {
-        return { kind: 'redirect', to: `${customPath}/api/auth/signin` };
+        return { kind: "redirect", to: `${customPath}/api/auth/signin` };
       }
     };
 
@@ -98,8 +103,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   const getAdditionalFiles = () => {
     const filesToWrite: AdminFileToWrite[] = [
       {
-        mode: 'write',
-        outputPath: 'pages/api/auth/[...nextauth].js',
+        mode: "write",
+        outputPath: "pages/api/auth/[...nextauth].js",
         src: authTemplate({
           gqlNames,
           identityField,
@@ -111,8 +116,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
         }),
       },
       {
-        mode: 'write',
-        outputPath: 'next.config.js',
+        mode: "write",
+        outputPath: "next.config.js",
         src: nextConfigTemplate({ keystonePath: customPath }),
       },
     ];
@@ -134,7 +139,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   ];
   // TODO: Add Provider Types
   // @ts-ignore
-  function addPages(provider) {
+  function addPages(provider: Provider) {
     const name = provider.id;
     publicPages.push(`${customPath}/api/auth/signin/${name}`);
     publicPages.push(`${customPath}/api/auth/callback/${name}`);
@@ -186,34 +191,45 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   const withItemData = (
     _sessionStrategy: SessionStrategy<Record<string, any>>
   ): SessionStrategy<NextAuthSession | undefined> => {
-    const { get, ...sessionStrategy } = _sessionStrategy;
+    const { get, start, ...sessionStrategy } = _sessionStrategy;
     return {
       ...sessionStrategy,
+      start,
       get: async ({ req }) => {
         const pathname = url.parse(req?.url!).pathname!;
-        if (pathname.includes('/api/auth')) {
+        if (pathname.includes("/api/auth")) {
           return;
         }
+        if (req.headers.authorization?.split(" ")[0] === "Bearer") {
+          const request = req as NextApiRequest;
+          const token = await getToken({ req: request, secret: sessionSecret });
+
+          if (token?.data?.id) {
+            return token as NextAuthSession;
+          }
+        }
         const nextSession: unknown = await getSession({ req });
+
         if (nextSession) {
           return nextSession as NextAuthSession;
         }
       },
       end: async ({ res, req }) => {
         const TOKEN_NAME =
-          process.env.NODE_ENV === 'production'
-            ? '__Secure-next-auth.session-token'
-            : 'next-auth.session-token';
+          process.env.NODE_ENV === "production"
+            ? "__Secure-next-auth.session-token"
+            : "next-auth.session-token";
         res.setHeader(
-          'Set-Cookie',
-          cookie.serialize(TOKEN_NAME, '', {
+          "Set-Cookie",
+          cookie.serialize(TOKEN_NAME, "", {
             maxAge: 0,
             expires: new Date(),
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            path: '/',
-            sameSite: 'lax',
-            domain: url.parse(req.url).hostname,
+            secure: process.env.NODE_ENV === "production",
+            path: "/",
+            sameSite: "lax",
+            // TODO: Update parse to URL
+            domain: url.parse(req.url as string).hostname as string,
           })
         );
       },
@@ -247,9 +263,9 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
         enableSessionItem: true,
         isAccessAllowed: async (context: KeystoneContext) => {
           if (
-            process.env.NODE_ENV !== 'production' &&
+            process.env.NODE_ENV !== "production" &&
             context.req?.url !== undefined &&
-            new URL(context.req.url, 'http://example.com').pathname ===
+            new URL(context.req.url, "http://example.com").pathname ===
               `${customPath}/api/__keystone_api_build`
           ) {
             return true;
@@ -258,13 +274,13 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           // even if the user isn't logged in (which should always be the case if they're seeing /init)
           const headers = context.req?.headers;
           const host = headers
-            ? headers['x-forwarded-host'] || headers.host
+            ? headers["x-forwarded-host"] || headers.host
             : null;
           const thisUrl = headers?.referer
             ? new URL(headers.referer)
             : undefined;
           const accessingInitPage =
-            thisUrl?.pathname === '/init' &&
+            thisUrl?.pathname === "/init" &&
             thisUrl?.host === host &&
             (await context.sudo().query[listKey].count({})) === 0;
           return (
@@ -278,7 +294,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     }
 
     if (!keystoneConfig.session)
-      throw new TypeError('Missing .session configuration');
+      throw new TypeError("Missing .session configuration");
     const session = withItemData(keystoneConfig.session);
 
     const existingExtendGraphQLSchema = keystoneConfig.extendGraphqlSchema;
