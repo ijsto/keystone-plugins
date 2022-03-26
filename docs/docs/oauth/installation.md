@@ -29,11 +29,10 @@ pnpm install keystone-6-oauth
 
 ## Keystone 6 Setup
 
-In your `keystone.ts`:
-
 ### Import `createAuth`
 
 ```javascript
+// ./keystone.ts
 import { createAuth } from "keystone-6-oauth"; // Added this
 // ...
 ```
@@ -41,6 +40,7 @@ import { createAuth } from "keystone-6-oauth"; // Added this
 ### Import Provider of your choice
 
 ```javascript
+// ./keystone.ts
 import { createAuth } from "keystone-6-oauth";
 import Facebook from "keystone-6-oauth/providers/Facebook"; // Added this
 ```
@@ -52,6 +52,7 @@ import Facebook from "keystone-6-oauth/providers/Facebook"; // Added this
 Define `sessionSection` and handler to ensure it is present.
 
 ```javascript
+// ./keystone.ts
 import { createAuth } from "keystone-6-oauth";
 
 // ...
