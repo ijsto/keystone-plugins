@@ -9,14 +9,44 @@ export const en: SidebarConfig = {
   ],
   "/oauth/": [
     {
-      text: "Keystone OAuth",
+      text: "Getting Started",
       children: [
         "/oauth/introduction.md",
-        "/oauth/getting-started.md",
+        "/oauth/installation.md",
         "/oauth/providers.md",
-        "/oauth/advanced.md",
         "/oauth/tutorials.md",
       ],
+    },
+    {
+      text: "Tutorials",
+      collapsible: false,
+      children: [
+        "/tutorials/recipes.md",
+        "/tutorials/videos.md",
+        "/tutorials/posts.md",
+      ],
+    },
+    {
+      text: "Migration Guides",
+      collapsible: true,
+      children: ["/migrations/v20-v1.md"],
+    },
+  ],
+  "/tutorials/": [
+    {
+      text: "Tutorials",
+      collapsible: false,
+      children: [
+        "/tutorials/introduction.md",
+        "/tutorials/recipes.md",
+        "/tutorials/videos.md",
+        "/tutorials/posts.md",
+      ],
+    },
+    {
+      text: "Migration Guides",
+      collapsible: false,
+      children: ["/migrations/v20-v1.md"],
     },
   ],
   "/advanced/": [
@@ -29,20 +59,11 @@ export const en: SidebarConfig = {
       children: ["/advanced/recipes/README.md"],
     },
   ],
-  "/reference/": [
+  "/migration-guides/": [
     {
-      text: "Keystone OAuth Reference",
+      text: "Migration Guides",
       collapsible: true,
-      children: [
-        "/reference/cli.md",
-        "/reference/config.md",
-        "/reference/frontmatter.md",
-        "/reference/components.md",
-        "/reference/plugin-api.md",
-        "/reference/theme-api.md",
-        "/reference/client-api.md",
-        "/reference/node-api.md",
-      ],
+      children: ["/migrations/v20-v1.md"],
     },
   ],
 };

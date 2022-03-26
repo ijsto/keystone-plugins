@@ -1,12 +1,6 @@
-# Getting Started
+# Installation
 
-## Provider Setup
-
-To use this plugin you will need API credentials for every provider you will choose to use.
-
-TODO: ...
-
-## Installation
+## Install package
 
 <CodeGroup>
   <CodeGroupItem title="YARN" active>
