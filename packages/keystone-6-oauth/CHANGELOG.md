@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.12
+
+### Patch Changes
+
+- 17259cf: Try - Vercel deployment
+
 ## 0.0.11
 
 ### Patch Changes
