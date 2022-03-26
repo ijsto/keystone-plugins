@@ -1,6 +1,6 @@
 {
   "name": "keystone-6-oauth",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "repository": "https://github.com/ijsto/keystone-6-oauth",
   "license": "MIT",
   "main": "dist/keystone-6-oauth.cjs.js",
