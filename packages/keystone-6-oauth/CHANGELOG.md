@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.13
+
+### Patch Changes
+
+- 7bb6b9d: Add repo, homepage + bugs links
+
 ## 0.0.12
 
 ### Patch Changes
