@@ -27,6 +27,14 @@ export const en: SidebarConfig = {
       ],
     },
     {
+      text: "Troubleshooting",
+      collapsible: false,
+      children: [
+        "/troubleshooting/known-errors.md",
+        "/troubleshooting/limitations.md",
+      ],
+    },
+    {
       text: "Migration Guides",
       collapsible: true,
       children: ["/migrations/v20-v1.md"],
@@ -46,6 +54,31 @@ export const en: SidebarConfig = {
     {
       text: "Migration Guides",
       collapsible: false,
+      children: ["/migrations/v20-v1.md"],
+    },
+  ],
+  "/troubleshooting/": [
+    {
+      text: "Tutorials",
+      collapsible: true,
+      children: [
+        "/tutorials/introduction.md",
+        "/tutorials/recipes.md",
+        "/tutorials/videos.md",
+        "/tutorials/posts.md",
+      ],
+    },
+    {
+      text: "Troubleshooting",
+      collapsible: false,
+      children: [
+        "/troubleshooting/known-errors.md",
+        "/troubleshooting/limitations.md",
+      ],
+    },
+    {
+      text: "Migration Guides",
+      collapsible: true,
       children: ["/migrations/v20-v1.md"],
     },
   ],
