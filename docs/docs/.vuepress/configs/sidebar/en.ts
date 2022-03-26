@@ -15,7 +15,6 @@ export const en: SidebarConfig = {
         "/oauth/introduction.md",
         "/oauth/installation.md",
         "/oauth/providers.md",
-        "/oauth/tutorials.md",
       ],
     },
     {
