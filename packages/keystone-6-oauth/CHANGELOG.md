@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.14
+
+### Patch Changes
+
+- f35de89: Initialize Troubleshooting
+
 ## 0.0.13
 
 ### Patch Changes
