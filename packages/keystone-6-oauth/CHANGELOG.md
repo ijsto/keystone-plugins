@@ -1,5 +1,12 @@
 # keystone-6-oauth
 
+## 0.0.12
+
+### Patch Changes
+
+- 848faae: Revert docs build script change
+- 17259cf: Try - Vercel deployment
+
 ## 0.0.11
 
 ### Patch Changes
