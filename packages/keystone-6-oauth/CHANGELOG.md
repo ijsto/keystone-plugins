@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.11
+
+### Patch Changes
+
+- 5577fde: Reduce log sizes for events
+
 ## 0.0.10
 
 ### Patch Changes
