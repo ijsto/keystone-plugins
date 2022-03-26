@@ -1,7 +1,14 @@
 {
   "name": "keystone-6-oauth",
   "version": "0.0.12",
-  "repository": "https://github.com/ijsto/keystone-6-oauth",
+  "homepage": "https://keystone-oauth.vercel.app",
+  "bugs": {
+    "url": "https://github.com/ijsto/keystone-plugins/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ijsto/keystone-plugins"
+  },
   "license": "MIT",
   "main": "dist/keystone-6-oauth.cjs.js",
   "module": "dist/keystone-6-oauth.esm.js",
