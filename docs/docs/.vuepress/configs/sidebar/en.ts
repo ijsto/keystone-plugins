@@ -10,6 +10,7 @@ export const en: SidebarConfig = {
   "/oauth/": [
     {
       text: "Getting Started",
+      collapsible: false,
       children: [
         "/oauth/introduction.md",
         "/oauth/installation.md",
@@ -28,7 +29,7 @@ export const en: SidebarConfig = {
     },
     {
       text: "Troubleshooting",
-      collapsible: false,
+      collapsible: true,
       children: [
         "/troubleshooting/known-errors.md",
         "/troubleshooting/limitations.md",
@@ -58,6 +59,16 @@ export const en: SidebarConfig = {
     },
   ],
   "/troubleshooting/": [
+    {
+      text: "Getting Started",
+      collapsible: true,
+      children: [
+        "/oauth/introduction.md",
+        "/oauth/installation.md",
+        "/oauth/providers.md",
+        "/oauth/tutorials.md",
+      ],
+    },
     {
       text: "Tutorials",
       collapsible: true,
