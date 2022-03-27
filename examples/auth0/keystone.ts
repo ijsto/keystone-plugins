@@ -25,10 +25,6 @@ const auth = createAuth({
   identityField: 'subjectId',
   sessionData: `id name email`,
   autoCreate: true,
-  pages: {
-    signIn: '/login',
-    error: '/error',
-  },
   resolver: async ({user}:{user: any}) => {
     const username = user.name as string;
     const email = user.email as string;
