@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.15
+
+### Patch Changes
+
+- 2eb2dd8: Remove deprecated graphql
+
 ## 0.0.14
 
 ### Patch Changes
