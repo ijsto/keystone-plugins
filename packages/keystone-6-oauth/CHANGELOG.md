@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.16
+
+### Patch Changes
+
+- 10b1f53: Minor cleanups + put back graphql in peerDeps
+
 ## 0.0.15
 
 ### Patch Changes
