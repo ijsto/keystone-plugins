@@ -111,8 +111,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           autoCreate,
           identityField,
           listKey,
-          pages,
-          resolver,
           sessionData,
           sessionSecret,
         }),
@@ -170,6 +168,9 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
       const msg = `A createAuth() invocation specifies the list "${listKey}" but no list with that key has been defined.`;
       throw new Error(msg);
     }
+
+    // TODO: Check if providers
+    // TODO: Check other required commands/data
 
     // TODO: Check for String-like typing for identityField? How?
     // TODO: Validate that the identifyField is unique.

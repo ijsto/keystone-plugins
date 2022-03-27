@@ -27,8 +27,6 @@ export const authTemplate = ({
   autoCreate,
   identityField,
   listKey,
-  pages,
-  resolver,
   sessionData,
   sessionSecret,
 }: AuthTemplateOptions) => {
@@ -38,8 +36,6 @@ export const authTemplate = ({
     sessionData,
     listKey,
     autoCreate,
-    pages,
-    resolver,
     sessionSecret,
   });
   return authOut;
