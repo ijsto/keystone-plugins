@@ -13,7 +13,7 @@ type CoreNextAuthPageProps = {
   listKey: string;
   pages?: Partial<PagesOptions>;
   providers?: Provider[];
-  resolver: Function | undefined;
+  resolver?: Function | undefined;
   sessionData: string | undefined;
   sessionSecret: string;
 }
@@ -40,17 +40,14 @@ export default function NextAuthPage(props: NextAuthPageProps) {
     sessionSecret,
   } = props;
   console.log('NextAuthPage :: pages', pages);
-  console.log('NextAuthPage :: events', events);
   // TODO: (v1.1). https://github.com/ijsto/keystone-6-oauth/projects/1#card-78602004
 
   if (!query) {
-    // TODO: [Review] - can query be null?
     console.error("NextAuthPage got no query.")
     return null;
   }
 
   if (!providers || !providers.length) {
-    // TODO: [Docs] Add providers instructions
     console.error("You need to provide at least one provider.")
     return null;
   }
@@ -60,26 +57,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
   const protectIdentities = true;
 
   return NextAuth({
-    events: {
-      async signIn(message) { 
-        console.log("on successful sign in */");
-      },
-      async signOut(message) { 
-        console.log("on signout */");
-      },
-      async createUser(message) { 
-        console.log("/* user created */");
-      },
-      async updateUser(message) { 
-        console.log("/* user updated - e.g. their email was verified */");
-      },
-      async linkAccount(message) { 
-        console.log("/* account (e.g. Twitter) linked to a user */");
-      },
-      async session(message) { 
-        console.log("/* session is active */");
-      },
-    },
+    events,
     jwt,
     pages,
     providers,
