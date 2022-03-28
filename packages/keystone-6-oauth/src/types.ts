@@ -2,15 +2,6 @@ import { BaseListTypeInfo, KeystoneConfig } from "@keystone-6/core/types";
 import { PagesOptions } from "next-auth";
 import { Provider } from "next-auth/providers";
 
-export type AuthGqlNames = {
-  CreateInitialInput: string;
-  createInitialItem: string;
-  authenticateItemWithPassword: string;
-  ItemAuthenticationWithPasswordResult: string;
-  ItemAuthenticationWithPasswordSuccess: string;
-  ItemAuthenticationWithPasswordFailure: string;
-};
-
 export type NextAuthSession = { listKey: string; itemId: string; data: any };
 
 export type NextAuthProviders = Provider[];
@@ -37,7 +28,7 @@ export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   /** Path for Keystone interface */
   keystonePath?: string;
   // Custom pages for different NextAuth events
-  pages: any; // TODO: Fix types
+  pages?: any; // TODO: Fix types
   /** Providers for Next Auth */
   providers: NextAuthProviders;
   /** Resolver for user to define their profile */

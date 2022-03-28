@@ -20,7 +20,6 @@ import { nextConfigTemplate } from "./templates/next-config";
 
 import {
   AuthConfig,
-  AuthGqlNames,
   KeystoneOAuthConfig,
   NextAuthSession,
 } from "./types";
@@ -49,16 +48,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   // part of the createAuth API (in which case its use cases need to be documented and tested)
   // or whether always being true is what we want, in which case we can refactor our code
   // to match this. -TL
-  const gqlNames: AuthGqlNames = {
-    // Core
-    authenticateItemWithPassword: `authenticate${listKey}WithPassword`,
-    ItemAuthenticationWithPasswordResult: `${listKey}AuthenticationWithPasswordResult`,
-    ItemAuthenticationWithPasswordSuccess: `${listKey}AuthenticationWithPasswordSuccess`,
-    ItemAuthenticationWithPasswordFailure: `${listKey}AuthenticationWithPasswordFailure`,
-    // Initial data
-    CreateInitialInput: `CreateInitial${listKey}Input`,
-    createInitialItem: `createInitial${listKey}`,
-  };
 
   const customPath = !keystonePath || keystonePath === "/" ? "" : keystonePath;
   /**
@@ -107,7 +96,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
         mode: "write",
         outputPath: "pages/api/auth/[...nextauth].js",
         src: authTemplate({
-          gqlNames,
           autoCreate,
           identityField,
           listKey,
@@ -154,7 +142,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   const extendGraphqlSchema = getSchemaExtension({
     identityField,
     listKey,
-    gqlNames,
   });
 
   /**

@@ -1,6 +1,5 @@
 import ejs from "ejs";
 import { NextAuthPageProps } from "../pages/NextAuthPage";
-import { AuthGqlNames } from "../types";
 
 const template = `
 import getNextAuthPage from 'keystone-6-oauth/pages/NextAuthPage';
@@ -20,10 +19,9 @@ export default getNextAuthPage({
     });
   `;
 
-type AuthTemplateOptions = NextAuthPageProps & { gqlNames: AuthGqlNames };
+type AuthTemplateOptions = NextAuthPageProps;
 
 export const authTemplate = ({
-  gqlNames,
   autoCreate,
   identityField,
   listKey,
@@ -31,7 +29,6 @@ export const authTemplate = ({
   sessionSecret,
 }: AuthTemplateOptions) => {
   const authOut = ejs.render(template, {
-    gqlNames,
     identityField,
     sessionData,
     listKey,
