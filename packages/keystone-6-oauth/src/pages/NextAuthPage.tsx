@@ -40,7 +40,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
     sessionSecret,
   } = props;
   // TODO: (v1.1). https://github.com/ijsto/keystone-6-oauth/projects/1#card-78602004
-console.log('NextAuthPages... ',pages);
+  console.log('NextAuthPages... ',pages);
 
   if (!query) {
     console.error("NextAuthPage got no query.")
@@ -58,9 +58,9 @@ console.log('NextAuthPages... ',pages);
 
   return NextAuth({
     providers,
-    pages,
-    events,
-    jwt,
+    pages: pages || {},
+    events: events || {},
+    jwt: jwt || {},
     secret: sessionSecret,
     callbacks: {
       async signIn({ user, account, profile}) {

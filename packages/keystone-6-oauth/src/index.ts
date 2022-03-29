@@ -74,15 +74,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
         }
         return;
       }
-      if (pages) {
-        if (Object.values(pages).indexOf(pathname) > 0) {
-          return;
-        }
-      }
-      if (!session && (!pathname.includes(`${customPath}/api/auth/`) || !pathname.includes(pages?.signIn))) {
-        if (pages?.signIn) {
-          return { kind: "redirect", to: pages.signIn };
-        }
+
+      if (!session && !pathname.includes(`${customPath}/api/auth/`) && !(Object.values(pages).indexOf(pathname) > -1)) {
         return { kind: "redirect", to: `${customPath}/api/auth/signin` };
       }
     };

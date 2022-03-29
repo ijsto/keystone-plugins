@@ -31,6 +31,9 @@ const auth = createAuth({
     const email = user.email as string;
     return { email, username };
   },
+  pages: {
+    signIn: '/admin/auth/signin'
+  },
   keystonePath: '/admin',
   sessionSecret,
   providers: [
