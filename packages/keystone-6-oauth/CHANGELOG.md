@@ -1,5 +1,13 @@
 # keystone-6-oauth
 
+## 0.0.17
+
+### Patch Changes
+
+- 63156ec: Cleanup some unused code
+- 3a18f4e: Adds cookies{}
+- 63156ec: Upgrade to keystone `1.1.0`
+
 ## 0.0.16
 
 ### Patch Changes
