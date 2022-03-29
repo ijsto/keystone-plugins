@@ -74,8 +74,15 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
         }
         return;
       }
-
-      if (!session && !pathname.includes(`${customPath}/api/auth/`)) {
+      if (pages) {
+        if (Object.values(pages).indexOf(pathname) > 0) {
+          return;
+        }
+      }
+      if (!session && (!pathname.includes(`${customPath}/api/auth/`) || !pathname.includes(pages?.signIn))) {
+        if (pages?.signIn) {
+          return { kind: "redirect", to: pages.signIn };
+        }
         return { kind: "redirect", to: `${customPath}/api/auth/signin` };
       }
     };
@@ -122,6 +129,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     `${customPath}/api/auth/session`,
     `${customPath}/api/auth/providers`,
     `${customPath}/api/auth/signout`,
+    `${customPath}/api/auth/error`,
   ];
   // TODO: Add Provider Types
   // @ts-ignore
@@ -132,6 +140,13 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   }
   providers.map(addPages);
 
+  function appNextAuthPages(page: string) {
+    publicPages.push(page);
+  };
+  if (pages) {
+    Object.values(pages).forEach(page => appNextAuthPages(page as string));
+  }
+  
   /**
    * extendGraphqlSchema
    *
@@ -182,12 +197,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     const { get, start, ...sessionStrategy } = _sessionStrategy;
     return {
       ...sessionStrategy,
-      start: async ({res}) =>{
-        console.log("start");
-        
-        const session = await start({res});
-        return session;
-      },
+      start,
       get: async ({ req }) => {
         const pathname = url.parse(req?.url!).pathname!;
         if (pathname.includes("/api/auth")) {
