@@ -7,7 +7,7 @@ const isProd = process.env.NODE_ENV === "production";
 
 export default defineUserConfig<DefaultThemeOptions>({
   base: "/",
-
+  port: 4444,
   head: [
     [
       "link",
