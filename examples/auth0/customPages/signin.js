@@ -10,7 +10,7 @@ import { signIn, getProviders } from 'next-auth/react';
 
 
 const SigninContainer = ({ children, title }) => {
-  const { colors, shadow } = useTheme();
+  const { colors, shadow } = useTheme();ß
   return (
     <div>
       <head>
