@@ -17,11 +17,7 @@ import * as cookie from "cookie";
 import { nextConfigTemplate } from "./templates/next-config";
 // import * as Path from 'path';
 
-import {
-  AuthConfig,
-  KeystoneOAuthConfig,
-  NextAuthSession,
-} from "./types";
+import { AuthConfig, KeystoneOAuthConfig, NextAuthSession } from "./types";
 import { getSchemaExtension } from "./schema";
 import { authTemplate } from "./templates/auth";
 
@@ -34,6 +30,7 @@ import { authTemplate } from "./templates/auth";
 export type { NextAuthProviders, KeystoneOAuthConfig } from "./types";
 export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   autoCreate,
+  cookies,
   identityField,
   listKey,
   keystonePath,
@@ -63,8 +60,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     async ({ context, isValidSession }) => {
       const { req, session } = context;
       const pathname = url.parse(req?.url!).pathname!;
-      
-   
+
       if (isValidSession) {
         if (pathname === `${customPath}/api/auth/signin`) {
           return { kind: "redirect", to: `${customPath}` };
@@ -182,10 +178,10 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     const { get, start, ...sessionStrategy } = _sessionStrategy;
     return {
       ...sessionStrategy,
-      start: async ({res}) =>{
+      start: async ({ res }) => {
         console.log("start");
-        
-        const session = await start({res});
+
+        const session = await start({ res });
         return session;
       },
       get: async ({ req }) => {
@@ -194,7 +190,10 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           return;
         }
         if (req.headers.authorization?.split(" ")[0] === "Bearer") {
-          const token = await getToken({ req, secret: sessionSecret }) as NextAuthSession;
+          const token = (await getToken({
+            req,
+            secret: sessionSecret,
+          })) as NextAuthSession;
 
           if (token?.data?.id) {
             return token;
@@ -262,11 +261,9 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           ) {
             return true;
           }
-          return (
-            (keystoneConfig.ui?.isAccessAllowed
-              ? keystoneConfig.ui.isAccessAllowed(context)
-              : context.session !== undefined)
-          );
+          return keystoneConfig.ui?.isAccessAllowed
+            ? keystoneConfig.ui.isAccessAllowed(context)
+            : context.session !== undefined;
         },
       };
     }
@@ -279,6 +276,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     return {
       ...keystoneConfig,
       ui,
+      cookies,
       providers,
       pages,
       resolver,

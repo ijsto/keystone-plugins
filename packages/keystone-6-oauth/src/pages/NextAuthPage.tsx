@@ -1,4 +1,4 @@
-import NextAuth, { EventCallbacks, PagesOptions } from 'next-auth';
+import NextAuth, { CookiesOptions, EventCallbacks, PagesOptions } from 'next-auth';
 import type { KeystoneListsAPI } from '@keystone-6/core/types';
 import { Provider } from 'next-auth/providers';
 import { validateNextAuth } from '../lib/validateNextAuth';
@@ -7,6 +7,7 @@ import { JWTOptions } from 'next-auth/jwt';
 // TODO: See if possible to merge with `type AuthConfig`
 type CoreNextAuthPageProps = {
   autoCreate: boolean;
+  cookies?: Partial<CookiesOptions>;
   events?: Partial<EventCallbacks>;
   identityField: string;
   jwt?: Partial<JWTOptions>;
@@ -28,6 +29,7 @@ export type NextAuthPageProps = CoreNextAuthPageProps & NextAuthGglProps;
 export default function NextAuthPage(props: NextAuthPageProps) {
   const {
     autoCreate,
+    cookies,
     events,
     identityField,
     jwt,
@@ -56,6 +58,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
   const protectIdentities = true;
 
   return NextAuth({
+    cookies,
     providers,
     secret: sessionSecret,
     callbacks: {
