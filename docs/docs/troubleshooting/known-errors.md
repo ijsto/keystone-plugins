@@ -20,29 +20,8 @@ Error: Cannot find module '/home/optimbro/dev/projects/dotSentry/backend/.keysto
 - re-install Keystone `yarn install`
 - start Keystone `yarn dev`
 
-Additionally you can visit http://localhost:3000/admin/api/auth (`http://BACKEND_URL/admin/api/auth`) and log in.
-This should explicitly generate the missing `api` folder.
-
-#### **Option B**
-
-- delete the `.keystone` and `node_modules` folders
-- clean yarn cache `yarn cache clean`
-- re-install Keystone `yarn install`
-- start Keystone `yarn dev`
-
-Additionally you can visit http://localhost:3000/admin/api/auth (`http://BACKEND_URL/admin/api/auth`) and log in.
-This should explicitly generate the missing `api` folder.
-
-#### **Option C (last resort)**
-
-- delete the `.keystone` and `node_modules` folders
-- clean yarn cache `yarn cache clean`
-- restart your computer
-- re-install Keystone `yarn install`
-- start Keystone `yarn dev`
-
-Additionally you can visit http://localhost:3000/admin/api/auth (`http://BACKEND_URL/admin/api/auth`) and log in.
-This should explicitly generate the missing `api` folder.
+Additionally you can visit http://localhost:3000/admin/api/__keystone_api_build(`http://BACKEND_URL/admin/api/__keystone_api_build'`) and log in.
+This should explicitly generate the missing `api` file.
 
 ### Cause
 
