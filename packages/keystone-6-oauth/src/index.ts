@@ -8,7 +8,6 @@ import {
   SessionStrategy,
   BaseKeystoneTypeInfo,
 } from "@keystone-6/core/types";
-import { NextApiRequest } from "next";
 import { getSession } from "next-auth/react";
 import { getToken } from "next-auth/jwt";
 import { Provider } from "next-auth/providers";
@@ -64,9 +63,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     async ({ context, isValidSession }) => {
       const { req, session } = context;
       const pathname = url.parse(req?.url!).pathname!;
-      if (pathname === `${customPath}/api/__keystone_api_build`) {
-        return;
-      }
+      
+   
       if (isValidSession) {
         if (pathname === `${customPath}/api/auth/signin`) {
           return { kind: "redirect", to: `${customPath}` };
@@ -184,18 +182,22 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     const { get, start, ...sessionStrategy } = _sessionStrategy;
     return {
       ...sessionStrategy,
-      start,
+      start: async ({res}) =>{
+        console.log("start");
+        
+        const session = await start({res});
+        return session;
+      },
       get: async ({ req }) => {
         const pathname = url.parse(req?.url!).pathname!;
         if (pathname.includes("/api/auth")) {
           return;
         }
         if (req.headers.authorization?.split(" ")[0] === "Bearer") {
-          const request = req as NextApiRequest;
-          const token = await getToken({ req: request, secret: sessionSecret });
+          const token = await getToken({ req, secret: sessionSecret }) as NextAuthSession;
 
           if (token?.data?.id) {
-            return token as NextAuthSession;
+            return token;
           }
         }
         const nextSession: unknown = await getSession({ req });
@@ -260,21 +262,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           ) {
             return true;
           }
-          // Allow access to the adminMeta data from the /init path to correctly render that page
-          // even if the user isn't logged in (which should always be the case if they're seeing /init)
-          const headers = context.req?.headers;
-          const host = headers
-            ? headers["x-forwarded-host"] || headers.host
-            : null;
-          const thisUrl = headers?.referer
-            ? new URL(headers.referer)
-            : undefined;
-          const accessingInitPage =
-            thisUrl?.pathname === "/init" &&
-            thisUrl?.host === host &&
-            (await context.sudo().query[listKey].count({})) === 0;
           return (
-            accessingInitPage ||
             (keystoneConfig.ui?.isAccessAllowed
               ? keystoneConfig.ui.isAccessAllowed(context)
               : context.session !== undefined)

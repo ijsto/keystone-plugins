@@ -39,7 +39,6 @@ export default function NextAuthPage(props: NextAuthPageProps) {
     sessionData,
     sessionSecret,
   } = props;
-  console.log('NextAuthPage :: pages', pages);
   // TODO: (v1.1). https://github.com/ijsto/keystone-6-oauth/projects/1#card-78602004
 
   if (!query) {
@@ -57,13 +56,10 @@ export default function NextAuthPage(props: NextAuthPageProps) {
   const protectIdentities = true;
 
   return NextAuth({
-    events,
-    jwt,
-    pages,
     providers,
     secret: sessionSecret,
     callbacks: {
-      async signIn({ user, account, profile, ...rest }) {
+      async signIn({ user, account, profile}) {
         let identity;
         if (typeof user.id === 'string') {
           identity = user.id;
@@ -72,7 +68,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
         } else {
           identity = 0;
         }
-        const userInput = resolver ? await resolver({ user, account, profile, ...rest }) : {};
+        const userInput = resolver ? await resolver({ user, account, profile}) : {};
 
         const result = await validateNextAuth(
           identityField,

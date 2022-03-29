@@ -4,7 +4,6 @@ import { graphql } from '@keystone-6/core';
 import { getBaseAuthSchema } from './gql/getBaseAuthSchema';
 
 export const getSchemaExtension = ({
-  identityField,
   listKey,
 }: {
   identityField: string;

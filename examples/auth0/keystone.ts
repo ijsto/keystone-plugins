@@ -28,7 +28,6 @@ const auth = createAuth({
   resolver: async ({user}:{user: any}) => {
     const username = user.name as string;
     const email = user.email as string;
-
     return { email, username };
   },
   keystonePath: '/admin',
