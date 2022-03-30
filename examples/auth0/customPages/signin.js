@@ -10,6 +10,67 @@ import { signIn, getProviders } from 'next-auth/react';
 
 
 const SigninContainer = ({ children, title }) => {
+  const { colors, shadow } = useTheme();
+  return (
+    <div>
+      <head>
+        <title>{title || 'Keystone'}</title>
+      </head>
+      <Center
+        css={{
+          minWidth: '100vw',
+          minHeight: '100vh',
+          backgroundColor: colors.backgroundMuted,
+        }}
+        rounding="medium"
+      >
+        <Box
+          css={{
+            background: colors.background,
+            width: 600,
+            boxShadow: shadow.s100,
+          }}
+          margin="medium"
+          padding="xlarge"
+          rounding="medium"
+        >
+          {children}
+        </Box>
+      </Center>
+    </div>
+  );
+};
+export const getSigninPage = (props) => () => <SigninPage {...props} />;
+
+export default function SigninPage(props) {
+  const {
+    csrfToken,
+    providers,
+    callbackUrl,
+    theme,
+    email,
+    error: errorType,
+  } = props
+  const router = useRouter();
+    // We only want to render providers
+   
+  const { error } = router.query;
+  console.log('error', error);
+
+  if (error) {
+    return (
+      <SigninContainer title="Keystone - Sign In">
+        <H1>Sign In - Error</H1>
+        <p>Oops, something went wrong. Please try again.</p>
+        <p>{error}</p>
+      </SigninContainer>
+    )
+  }
+
+import { signIn, getProviders } from 'next-auth/react';
+
+
+const SigninContainer = ({ children, title }) => {
   const { colors, shadow } = useTheme();ß
   return (
     <div>
