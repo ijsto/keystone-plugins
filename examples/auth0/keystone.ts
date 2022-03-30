@@ -5,6 +5,7 @@ import Auth0 from 'keystone-6-oauth/providers/auth0';
 import { createAuth } from 'keystone-6-oauth';
 import { KeystoneContext } from '@keystone-6/core/types';
 import { lists } from './schemas';
+import * as Path from 'path';
 
 let sessionSecret = process.env.SESSION_SECRET;
 
@@ -29,6 +30,9 @@ const auth = createAuth({
     const username = user.name as string;
     const email = user.email as string;
     return { email, username };
+  },
+  pages: {
+    signIn: '/admin/auth/signin',  
   },
   keystonePath: '/admin',
   sessionSecret,
@@ -60,6 +64,22 @@ export default auth.withAuth(
     },
     ui: {
       isAccessAllowed: (context: KeystoneContext) => !!context.session?.data,
+      publicPages: ['/admin/auth/signin', '/admin/auth/error'],
+      getAdditionalFiles: [
+        async (config: KeystoneConfig) => 
+        [
+          {
+            mode: 'copy',
+            inputPath: Path.join(__dirname, './customPages/signin.js'),
+            outputPath: 'pages/auth/signin.js',
+          },
+          {
+            mode: 'copy',
+            inputPath: Path.join(__dirname, './customPages/error.js'),
+            outputPath: 'pages/auth/error.js',
+          }
+        ]
+      ]
     },
     lists,
     session: statelessSessions({
