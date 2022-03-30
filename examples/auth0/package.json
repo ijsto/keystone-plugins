@@ -1,6 +1,6 @@
 {
   "name": "keystone-6-oauth-auth0-example",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "build": "keystone build",
@@ -15,7 +15,7 @@
     "@types/ejs": "^3.1.0",
     "dotenv": "^14.3.2",
     "ejs": "^3.1.6",
-    "keystone-6-oauth": "^0.0.17",
+    "keystone-6-oauth": "^0.0.18",
     "typescript": "^4.5.5"
   },
   "devDependencies": {

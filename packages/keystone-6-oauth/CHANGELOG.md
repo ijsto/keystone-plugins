@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.0.18
+
+### Patch Changes
+
+- ca2d270: Add `pages` confgiuration for custom auth pages
+
 ## 0.0.17
 
 ### Patch Changes

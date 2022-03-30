@@ -1,5 +1,12 @@
 # @opensaas-keystone/next-auth-backend
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [ca2d270]
+  - keystone-6-oauth@0.0.18
+
 ## 0.0.2
 
 ### Patch Changes
