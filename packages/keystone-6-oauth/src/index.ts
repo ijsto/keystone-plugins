@@ -74,7 +74,9 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
         }
         return;
       }
-
+      if (pathname.includes('/_next/') || pathname.includes('/api/auth/')) {
+        return;
+      }
       if (!session && !pathname.includes(`${customPath}/api/auth/`) && !(Object.values(pages).indexOf(pathname) > -1)) {
         return { kind: "redirect", to: `${customPath}/api/auth/signin` };
       }
@@ -116,13 +118,14 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
    * Must be added to the ui.publicPages config
    */
   const publicPages = [
+    `${customPath}/api/__keystone_api_build`,
     `${customPath}/api/auth/csrf`,
     `${customPath}/api/auth/signin`,
     `${customPath}/api/auth/callback`,
     `${customPath}/api/auth/session`,
     `${customPath}/api/auth/providers`,
     `${customPath}/api/auth/signout`,
-    `${customPath}/api/auth/error`,
+    `${customPath}/api/auth/error`
   ];
   // TODO: Add Provider Types
   // @ts-ignore
@@ -132,13 +135,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     publicPages.push(`${customPath}/api/auth/callback/${name}`);
   }
   providers.map(addPages);
-
-  function appNextAuthPages(page: string) {
-    publicPages.push(page);
-  };
-  if (pages) {
-    Object.values(pages).forEach(page => appNextAuthPages(page as string));
-  }
   
   /**
    * extendGraphqlSchema
@@ -257,6 +253,15 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           keystoneConfig?.ui?.pageMiddleware?.(args),
         enableSessionItem: true,
         isAccessAllowed: async (context: KeystoneContext) => {
+          const { req, session } = context;
+          const pathname = url.parse(req?.url!).pathname!;
+
+          // Allow nextjs scripts and static files to be accessed without auth
+          if (pathname.includes('/_next/')) {
+            return true;
+          }
+
+          //Allow keystone to access /api/__keystone_api_build for hot reloading
           if (
             process.env.NODE_ENV !== "production" &&
             context.req?.url !== undefined &&
@@ -265,10 +270,11 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           ) {
             return true;
           }
+
           return (
             (keystoneConfig.ui?.isAccessAllowed
               ? keystoneConfig.ui.isAccessAllowed(context)
-              : context.session !== undefined)
+              : session !== undefined)
           );
         },
       };

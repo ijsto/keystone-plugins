@@ -32,7 +32,7 @@ const auth = createAuth({
     return { email, username };
   },
   pages: {
-    signIn: '/admin/auth/signin'
+    signIn: '/admin/auth/signin',  
   },
   keystonePath: '/admin',
   sessionSecret,
@@ -64,6 +64,7 @@ export default auth.withAuth(
     },
     ui: {
       isAccessAllowed: (context: KeystoneContext) => !!context.session?.data,
+      publicPages: ['/admin/auth/signin', '/admin/auth/error'],
       getAdditionalFiles: [
         async (config: KeystoneConfig) => 
         [
@@ -71,6 +72,11 @@ export default auth.withAuth(
             mode: 'copy',
             inputPath: Path.join(__dirname, './customPages/signin.js'),
             outputPath: 'pages/auth/signin.js',
+          },
+          {
+            mode: 'copy',
+            inputPath: Path.join(__dirname, './customPages/error.js'),
+            outputPath: 'pages/auth/error.js',
           }
         ]
       ]

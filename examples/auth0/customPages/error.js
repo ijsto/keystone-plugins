@@ -6,7 +6,7 @@ import { useRouter } from 'next/dist/client/router';
 import { Button } from '@keystone-ui/button';
 import { ReactNode } from 'react';
 
-import { signIn, getProviders } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 
 const SigninContainer = ({ children, title }) => {
@@ -40,20 +40,12 @@ const SigninContainer = ({ children, title }) => {
     </div>
   );
 };
-export const getSigninPage = (props) => () => <SigninPage {...props} />;
+export const getErrorPage = (props) => () => <ErrorPage {...props} />;
 
-export default function SigninPage(props) {
-  const {
-    csrfToken,
-    providers,
-    callbackUrl,
-    theme,
-    email,
-    error: errorType,
-  } = props
+export default function ErrorPage() {
+
   const router = useRouter();
-    // We only want to render providers
-   
+
   const { error } = router.query;
   console.log('error', error);
 
@@ -72,26 +64,12 @@ export default function SigninPage(props) {
       <H1>Sign In</H1>
       <Button
         onClick={() =>
-          signIn('auth0')
+          signIn('auth0', {
+            callbackUrl: `${window.location.origin}`,
+          })
         }>
               Sign In with Auth0
             </Button>
-
-            {Object.values(providers).map((provider) => (
-        <div key={provider.name}>
-          <button onClick={() => signIn(provider.id)}>
-            Sign in with {provider.name}
-          </button>
-        </div>
-      ))}
     </SigninContainer>
   )
-}
-
-
-export async function getServerSideProps(context) {
-  const providers = await getProviders()
-  return {
-    props: { providers },
-  }
 }
