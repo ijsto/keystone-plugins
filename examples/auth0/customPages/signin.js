@@ -70,18 +70,11 @@ export default function SigninPage(props) {
   return (
     <SigninContainer title="Keystone - Sign In">
       <H1>Sign In</H1>
-      <Button
-        onClick={() =>
-          signIn('auth0')
-        }>
-              Sign In with Auth0
-            </Button>
-
-            {Object.values(providers).map((provider) => (
+      {Object.values(providers).map((provider) => (
         <div key={provider.name}>
-          <button onClick={() => signIn(provider.id)}>
+          <Button onClick={() => signIn(provider.id)}>
             Sign in with {provider.name}
-          </button>
+          </Button>
         </div>
       ))}
     </SigninContainer>
