@@ -1,5 +1,5 @@
 import { BaseListTypeInfo, KeystoneConfig } from "@keystone-6/core/types";
-import { PagesOptions } from "next-auth";
+import { CookiesOptions, PagesOptions } from "next-auth";
 import { Provider } from "next-auth/providers";
 
 export type NextAuthSession = { listKey: string; itemId: string; data: any };
@@ -11,6 +11,7 @@ type KeytoneOAuthOptions = {
   pages?: Partial<PagesOptions>;
 };
 type NextAuthOptions = {
+  cookies?: Partial<CookiesOptions>;
   resolver: any;
 };
 
@@ -21,6 +22,8 @@ export type KeystoneOAuthConfig = KeystoneConfig &
 export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   /** Auth Create users in Keystone DB from Auth Provider */
   autoCreate: boolean;
+  /** Adds ability to customize cookie options, for example, to facilitate cross-subdomain functionality */
+  cookies?: Partial<CookiesOptions>;
   /** The key of the list to authenticate users with */
   listKey: GeneratedListTypes["key"];
   /** The path of the field the identity is stored in; must be text-ish */
