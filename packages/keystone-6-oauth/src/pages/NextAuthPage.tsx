@@ -3,7 +3,6 @@ import type { KeystoneListsAPI } from '@keystone-6/core/types';
 import { Provider } from 'next-auth/providers';
 import { JWTOptions } from 'next-auth/jwt';
 import { validateNextAuth } from '../lib/validateNextAuth';
-import { JWTOptions } from 'next-auth/jwt';
 
 type CoreNextAuthPageProps = {
   autoCreate: boolean;
