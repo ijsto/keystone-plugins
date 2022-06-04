@@ -109,7 +109,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
               console.log(error);
               throw new Error(error);
             });
-          console.log('KS-OAuth · Created User', createUser);
+          console.log('KS-OAuth · Created User: ', createUser);
           return createUser.success;
         }
         console.log('Data', data);
