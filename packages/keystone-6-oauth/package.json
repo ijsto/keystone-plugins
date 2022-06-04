@@ -1,7 +1,14 @@
 {
   "name": "keystone-6-oauth",
-  "version": "0.0.3",
-  "repository": "https://github.com/ijsto/keystone-6-oauth",
+  "version": "0.0.18",
+  "homepage": "https://keystone-oauth.vercel.app",
+  "bugs": {
+    "url": "https://github.com/ijsto/keystone-plugins/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ijsto/keystone-plugins"
+  },
   "license": "MIT",
   "main": "dist/keystone-6-oauth.cjs.js",
   "module": "dist/keystone-6-oauth.esm.js",
@@ -13,11 +20,12 @@
     "cross-fetch": "^3.1.5",
     "ejs": "^3.1.7",
     "fast-deep-equal": "^3.1.3",
-    "next-auth": "^4.3.4"
+    "next-auth": "^4.3.1"
   },
   "devDependencies": {
     "@keystone-6/core": "^1.1.0",
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "turbo": "^1.1.6"
   },
   "peerDependencies": {
     "@keystone-6/core": "^1.1.0",

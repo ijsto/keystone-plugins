@@ -19,7 +19,8 @@
     "skipLibCheck": true
   },
   "include": [
-    "**/*"
+    "**/*",
+    "docs/docs/.vuepress/config.ts"  
   ],
   "exclude": [
     "**/node_modules/**/*"

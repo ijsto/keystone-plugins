@@ -65,19 +65,19 @@ export type AuthTokenRequestErrorCode = 'IDENTITY_NOT_FOUND' | 'MULTIPLE_IDENTIT
 
 export type PasswordAuthErrorCode =
   | AuthTokenRequestErrorCode
-  | 'FAILURE' // Generic
-  | 'SECRET_NOT_SET'
-  | 'SECRET_MISMATCH';
+  | "FAILURE" // Generic
+  | "SECRET_NOT_SET"
+  | "SECRET_MISMATCH";
 
 export type NextAuthErrorCode =
   | AuthTokenRequestErrorCode
-  | 'FAILURE' // Generic
-  | 'SUBJECT_NOT_FOUND';
+  | "FAILURE" // Generic
+  | "SUBJECT_NOT_FOUND";
 
 export type AuthTokenRedemptionErrorCode =
   | AuthTokenRequestErrorCode
-  | 'FAILURE' // Generic
-  | 'TOKEN_NOT_SET'
-  | 'TOKEN_MISMATCH'
-  | 'TOKEN_EXPIRED'
-  | 'TOKEN_REDEEMED';
+  | "FAILURE" // Generic
+  | "TOKEN_NOT_SET"
+  | "TOKEN_MISMATCH"
+  | "TOKEN_EXPIRED"
+  | "TOKEN_REDEEMED";

@@ -5,6 +5,13 @@
 .keystone
 *.log
 
+# Turbo
+.turbo
+
+build/**
+dist/**
+dist/
+.next/**
 
 # Logs
 logs
@@ -85,8 +92,6 @@ cypress/screenshots
 cypress/videos
 cypress/mock
 
-
-dist/
 
 # Used by the image field type tests as a storage target
 tmp_test_images/

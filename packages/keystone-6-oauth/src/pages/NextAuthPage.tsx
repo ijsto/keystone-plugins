@@ -3,6 +3,7 @@ import type { KeystoneListsAPI } from '@keystone-6/core/types';
 import { Provider } from 'next-auth/providers';
 import { JWTOptions } from 'next-auth/jwt';
 import { validateNextAuth } from '../lib/validateNextAuth';
+import { JWTOptions } from 'next-auth/jwt';
 
 type CoreNextAuthPageProps = {
   autoCreate: boolean;
@@ -53,6 +54,16 @@ export default function NextAuthPage(props: NextAuthPageProps) {
     return null;
   }
 
+  if (!query) {
+    console.error("NextAuthPage got no query.")
+    return null;
+  }
+
+  if (!providers || !providers.length) {
+    console.error("You need to provide at least one provider.")
+    return null;
+  }
+  
   const list = query[listKey];
   const queryAPI = query[listKey];
   const protectIdentities = true;
