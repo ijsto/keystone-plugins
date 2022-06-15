@@ -18,10 +18,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: 🟢 Setup Node.js 14.x
+      - name: 🟢 Setup Node.js 16.x
         uses: actions/setup-node@master
         with:
-          node-version: 14.x
+          node-version: 16.x
 
       - name: 👩🏼‍🚀 Setup pnpm 6.32.1
         uses: pnpm/action-setup@v2.1.0
