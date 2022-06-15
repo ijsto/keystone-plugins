@@ -1,5 +1,15 @@
 # keystone-6-oauth
 
+## 0.1.0
+
+### Minor Changes
+
+- 01c8469: Updates to Keystone V2
+
+### Patch Changes
+
+- 675362f: Chore - Bump Version
+
 ## 0.0.18
 
 ### Patch Changes

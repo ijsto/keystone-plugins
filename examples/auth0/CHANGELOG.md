@@ -1,5 +1,14 @@
 # @opensaas-keystone/next-auth-backend
 
+## 0.0.4
+
+### Patch Changes
+
+- 675362f: Chore - Bump Version
+- Updated dependencies [01c8469]
+- Updated dependencies [675362f]
+  - keystone-6-oauth@0.1.0
+
 ## 0.0.3
 
 ### Patch Changes
