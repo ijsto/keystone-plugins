@@ -1,8 +1,12 @@
-import type { ServerResponse, IncomingMessage } from 'http';
-import type { NextRequest } from 'next/server';
-import { Provider } from 'next-auth/providers';
-import { CookiesOptions, PagesOptions } from 'next-auth';
-import { BaseListTypeInfo, KeystoneConfig, CreateContext } from '@keystone-6/core/types';
+import type { ServerResponse, IncomingMessage } from "http";
+import type { NextRequest } from "next/server";
+import { Provider } from "next-auth/providers";
+import { CookiesOptions, PagesOptions } from "next-auth";
+import {
+  BaseListTypeInfo,
+  KeystoneConfig,
+  CreateContext,
+} from "@keystone-6/core/types";
 
 type NextAuthResponse = IncomingMessage & NextRequest;
 
@@ -25,7 +29,7 @@ export declare type AuthSessionStrategy<StoredSessionData> = {
 
 export type NextAuthProviders = Provider[];
 
-type KeytoneOAuthOptions = {
+type KeystoneOAuthOptions = {
   providers: NextAuthProviders;
   pages?: Partial<PagesOptions>;
 };
@@ -34,7 +38,9 @@ type NextAuthOptions = {
   resolver: any;
 };
 
-export type KeystoneOAuthConfig = KeystoneConfig & KeytoneOAuthOptions & NextAuthOptions;
+export type KeystoneOAuthConfig = KeystoneConfig &
+  KeystoneOAuthOptions &
+  NextAuthOptions;
 
 export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   /** Auth Create users in Keystone DB from Auth Provider */
@@ -42,9 +48,9 @@ export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   /** Adds ability to customize cookie options, for example, to facilitate cross-subdomain functionality */
   cookies?: Partial<CookiesOptions>;
   /** The key of the list to authenticate users with */
-  listKey: GeneratedListTypes['key'];
+  listKey: GeneratedListTypes["key"];
   /** The path of the field the identity is stored in; must be text-ish */
-  identityField: GeneratedListTypes['fields'];
+  identityField: GeneratedListTypes["fields"];
   /** Path for Keystone interface */
   keystonePath?: string;
   // Custom pages for different NextAuth events
@@ -61,7 +67,9 @@ export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   sessionSecret: string;
 };
 
-export type AuthTokenRequestErrorCode = 'IDENTITY_NOT_FOUND' | 'MULTIPLE_IDENTITY_MATCHES';
+export type AuthTokenRequestErrorCode =
+  | "IDENTITY_NOT_FOUND"
+  | "MULTIPLE_IDENTITY_MATCHES";
 
 export type PasswordAuthErrorCode =
   | AuthTokenRequestErrorCode
