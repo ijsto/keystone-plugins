@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../node_modules/vuepress-theme-hope/src/client/components/SkipLink.ts", "dep:@theme-hope_components_SkipLink__js"],
+  "sourcesContent": [null, "import d from \"../../../../../node_modules/vuepress-theme-hope/lib/client/components/SkipLink.js\";export default d;"],
+  "mappings": ";;;;;;;;;;;;;;AAIA,OAAO;AAEP,IAAA,mBAAe,gBAAgB;EAC7B,MAAM;EAEN,OAAO;IACL,SAAS;MACP,MAAM;MACN,SAAS;;;EAIb,MAAM,OAAK;AACT,UAAM,QAAQ,SAAQ;AACtB,UAAM,YAAY,IAAG;AAErB,UACE,MAAM,MAAM,MACZ,MAAM,UAAU,MAAO,MAAK,CAAE;AAGhC,UAAM,mBAAmB,CAAC,EAAE,OAAM,MAAmB;AACnD,YAAM,KAAK,SAAS,cACjB,OAA6B,IAAI;AAGpC,UAAI,IAAI;AACN,cAAM,iBAAiB,MAAW;AAChC,aAAG,gBAAgB,UAAU;AAC7B,aAAG,oBAAoB,QAAQ,cAAc;QAC/C;AAEA,WAAG,aAAa,YAAY,IAAI;AAChC,WAAG,iBAAiB,QAAQ,cAAc;AAC1C,WAAG,MAAK;AACR,eAAO,SAAS,GAAG,CAAC;;IAExB;AAEA,WAAO,MAAe;MACpB,EAAE,QAAQ;QACR,KAAK;QACL,UAAU;OACX;MACD,EACE,KACA;QACE,MAAM,IAAI,MAAM;QAChB,OAAO;QACP,SAAS;SAEX,iBAAiB;;EAGvB;CACD;;;AC3DiG,IAAO,4CAAQ;",
+  "names": []
+}

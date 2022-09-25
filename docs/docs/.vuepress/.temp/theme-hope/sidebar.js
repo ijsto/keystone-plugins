@@ -1,0 +1,1 @@
+export const sidebarData = {"/guide/":["README.md",{"text":"Bar feature","icon":"creative","collapsable":true,"prefix":"bar/","children":["README.md","baz.md"]},{"text":"Foo feature","icon":"config","collapsable":true,"prefix":"foo/","children":["README.md","ray.md"]}]}

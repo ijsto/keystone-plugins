@@ -135,3 +135,12 @@ examples/*/schema.graphql
 examples/*/schema.prisma
 
 .env.*local
+node_modules/
+docs-v2/.vuepress/.cache/
+docs-v2/.vuepress/.temp/
+docs-v2/.vuepress/dist/
+
+node_modules/
+docs-v2/.vuepress/.cache/
+docs-v2/.vuepress/.temp/
+docs-v2/.vuepress/dist/

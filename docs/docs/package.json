@@ -1,0 +1,38 @@
+{
+  "name": "docs",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "build": "vuepress build",
+    "clean-dev": "vuepress dev --clean-cache",
+    "dev": "vuepress dev"
+  },
+  "dependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.16.10",
+    "@babel/plugin-transform-typescript": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-flow": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@changesets/changelog-github": "^0.4.2",
+    "@changesets/cli": "^2.20.0",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.11.21",
+    "@types/react": "^17.0.38",
+    "babel-loader": "^8.2.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.5.1",
+    "turbo": "^1.1.7",
+    "typescript": "^4.5.5",
+    "vuepress": "^2.0.0-beta.51",
+    "vuepress-theme-hope": "^2.0.0-beta.104"
+  },
+  "author": "",
+  "license": "ISC"
+}

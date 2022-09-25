@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["external:@vuepress/client"],
+  "sourcesContent": ["export * from \"@vuepress/client\""],
+  "mappings": ";;;;;AAAA;AAAA;AAAA,6BAAc;",
+  "names": []
+}

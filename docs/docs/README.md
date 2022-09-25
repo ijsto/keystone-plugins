@@ -1,49 +1,26 @@
 ---
 home: true
+icon: home
 title: Home
 heroImage: /images/hero.png
+heroText: Keystone6
+tagline: Keystone6 Plugins.
 actions:
-  - text: Get Started
-    link: /oauth/introduction.html
+  - text: Read docs
+    link: /docs/
     type: primary
+
   - text: Recipes
     link: /recipes/
-    type: secondary
+
 features:
-  - title: To
-    details: TODO:...
-  - title: DO
-    details: TODO:...
-footer: MIT Licensed | Copyright © iJS.to
+  - title: OAuth
+    icon: lock
+    details: Adds OAuth support to Keystone6. Twitter, Facebook and most others.
+    link: /docs
+
+copyright: false
+footer: MIT Licensed | Copyright © 2019-present
 ---
 
-### Installation
-
-If you are coming from previous versions, please feel free to use below command to install - the rest of the setup is very similar.
-
-We have made some changes in how we map the fields to make it more flexible, a migration guide is coming soon.
-
-<CodeGroup>
-  <CodeGroupItem title="YARN" active>
-
-```bash
-yarn add keystone-6-oauth
-```
-
-  </CodeGroupItem>
-
-  <CodeGroupItem title="NPM">
-  
-```bash
-npm install keystone-6-oauth
-```
-  </CodeGroupItem>
-
-  <CodeGroupItem title="PNPM">
-
-```bash
-pnpm install keystone-6-oauth
-```
-
-  </CodeGroupItem>
-</CodeGroup>
+<!-- For related descriptions of configuration items, please see [Project HomePage Layout Config](https://vuepress-theme-hope.github.io/v2/guide/layout/home/). -->

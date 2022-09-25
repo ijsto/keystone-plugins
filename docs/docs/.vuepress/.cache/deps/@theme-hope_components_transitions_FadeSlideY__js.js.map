@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../node_modules/vuepress-theme-hope/src/client/components/transitions/FadeSlideY.ts", "dep:@theme-hope_components_transitions_FadeSlideY__js"],
+  "sourcesContent": [null, "import d from \"../../../../../node_modules/vuepress-theme-hope/lib/client/components/transitions/FadeSlideY.js\";export default d;"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAKA,OAAO;AAEP,IAAA,qBAAe,gBAAgB;EAC7B,MAAM;EAEN,MAAM,QAAQ,EAAE,MAAK,GAAE;AAErB,UAAM,gBAAgB,iBAAgB;AACtC,UAAM,gBAAgB,cAAc;AACpC,UAAM,gBAAgB,cAAc;AAEpC,WAAO,MACL,EACE,YACA;MACE,MAAM;MACN,MAAM;MACN;MACA;OAEF,MAAG;AAzBX;AAyBc,yBAAM,eAAN;KAAoB;EAEhC;CACD;;;AC5B+G,IAAO,0DAAQ;",
+  "names": []
+}
