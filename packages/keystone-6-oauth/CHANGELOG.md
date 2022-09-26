@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.2.0
+
+### Minor Changes
+
+- b74ad11: Replace docs + only update photoSrc (TEMP)
+
 ## 0.1.0
 
 ### Minor Changes
