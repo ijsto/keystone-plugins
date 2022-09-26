@@ -2,7 +2,7 @@ import ejs from "ejs";
 import { NextAuthTemplateProps } from "../pages/NextAuthPage";
 
 const template = `
-import getNextAuthPage from '@opensaas/keystone-nextjs-auth/pages/NextAuthPage';
+import getNextAuthPage from keystone-6-oauth/pages/NextAuthPage';
 import keystoneConfig from '../../../../../keystone';
 import { PrismaClient } from '.prisma/client';
 import { createQueryAPI } from '@keystone-6/core/___internal-do-not-use-will-break-in-patch/node-api';
