@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Keystone6 Plugins',
-  tagline: 'OAuth ・ Keystone6 plugins by iJS.',
+  tagline: ' ・ OAuth ・ ',
   url: 'https://ijs.to',
   baseUrl: '/',
   onBrokenLinks: 'throw',
