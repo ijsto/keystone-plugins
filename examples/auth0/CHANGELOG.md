@@ -1,5 +1,13 @@
 # @opensaas-keystone/next-auth-backend
 
+## 0.1.1
+
+### Patch Changes
+
+- 9ec2b33: update lock
+- Updated dependencies [9ec2b33]
+  - keystone-6-oauth@0.2.1
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.2.1
+
+### Patch Changes
+
+- 9ec2b33: update lock
+
 ## 0.2.0
 
 ### Minor Changes
