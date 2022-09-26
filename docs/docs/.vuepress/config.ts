@@ -59,12 +59,6 @@ export default defineUserConfig<DefaultThemeOptions>({
     },
   },
 
-  bundler:
-    // specify bundler via environment variable
-    process.env.DOCS_BUNDLER ??
-    // use vite by default
-    "@vuepress/vite",
-
   themeConfig: {
     logo: "/images/logo.png",
 
