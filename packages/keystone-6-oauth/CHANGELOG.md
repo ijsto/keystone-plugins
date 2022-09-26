@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.2.3
+
+### Patch Changes
+
+- e0f36ce: Update preconstruct v
+
 ## 0.2.2
 
 ### Patch Changes
