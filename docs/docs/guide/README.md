@@ -1,5 +1,0 @@
-# Contributing
-
-Thank you for considering contributing to Keystone 6 OAuth or related plugins.
-
-To make it easier for you to get started and to make the process as smooth as possible, we have prepared instructions. To learn more please see [Contribution Guide](/guide/contribution.html)
