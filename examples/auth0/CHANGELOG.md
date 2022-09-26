@@ -1,5 +1,16 @@
 # @opensaas-keystone/next-auth-backend
 
+## 0.1.0
+
+### Minor Changes
+
+- b74ad11: Replace docs + only update photoSrc (TEMP)
+
+### Patch Changes
+
+- Updated dependencies [b74ad11]
+  - keystone-6-oauth@0.2.0
+
 ## 0.0.4
 
 ### Patch Changes
