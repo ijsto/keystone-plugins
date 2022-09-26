@@ -34,7 +34,7 @@
     "@changesets/cli": "^2.20.0",
     "@jest/test-sequencer": "^26.6.3",
     "@manypkg/cli": "^0.19.1",
-    "@preconstruct/cli": "2.1.5",
+    "@preconstruct/cli": "2.2.1",
     "@preconstruct/eslint-plugin-format-js-tag": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@types/jest": "^27.4.0",
