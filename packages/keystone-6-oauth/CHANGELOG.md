@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.3.1
+
+### Patch Changes
+
+- 180ac18: patch(template): typo
+
 ## 0.3.0
 
 ### Minor Changes
