@@ -76,6 +76,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
         const userInput = resolver ? await resolver({ user, account, profile }) : {};
 
         const result = await validateNextAuth(identityField, identity, protectIdentities, list);
+
         // ID
         const data: any = {
           [identityField]: identity,
@@ -99,8 +100,10 @@ export default function NextAuthPage(props: NextAuthPageProps) {
           return createUser.success;
         }
 
+        // TODO: Make updating user data more eloquent. I.e. email and username prolly shdn'nt b updated OR user should be able to choose which fields to update (or which to preserve).
+        // NOTE: For now, replacing { data } with { data: { photoSrc:data.photoSrc } } to prevent updating email and username and potentially other fields that shouldn't be updated without explicit request.
         const updateUser = await list
-          .updateOne({ where: { id: result.item.id }, data })
+          .updateOne({ where: { id: result.item.id }, data: { photoSrc:data.photoSrc } })
           .then(returned => {
             return { success: true, user: returned };
           })
@@ -108,6 +111,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
             console.error(error);
             throw new Error(error);
           });
+
         return updateUser.success;
       },
       async redirect({ url }) {

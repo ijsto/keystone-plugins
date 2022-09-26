@@ -135,3 +135,4 @@ examples/*/schema.graphql
 examples/*/schema.prisma
 
 .env.*local
+.vercel
