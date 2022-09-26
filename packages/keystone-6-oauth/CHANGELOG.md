@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.2.2
+
+### Patch Changes
+
+- 416697e: Trigger publish
+
 ## 0.2.1
 
 ### Patch Changes
