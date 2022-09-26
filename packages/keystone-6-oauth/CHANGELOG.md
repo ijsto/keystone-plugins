@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.3.0
+
+### Minor Changes
+
+- a230ff9: Cleanup legacy code
+
 ## 0.2.3
 
 ### Patch Changes
