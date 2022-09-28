@@ -43,8 +43,5 @@
       "providers/*.ts",
       "pages/*.tsx"
     ]
-  },
-  "resolutions": {
-    "next": "12.2.4"
   }
 }
