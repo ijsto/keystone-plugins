@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.3.2
+
+### Patch Changes
+
+- be6c9d2: patch(pkg): next resolutions - fixes infinite compiling
+
 ## 0.3.1
 
 ### Patch Changes
