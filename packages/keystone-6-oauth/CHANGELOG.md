@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.3.3
+
+### Patch Changes
+
+- af46813: Move resolutions to root
+
 ## 0.3.2
 
 ### Patch Changes
