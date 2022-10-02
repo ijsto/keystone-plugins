@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.3.4
+
+### Patch Changes
+
+- fb43d6c: docs - update root and OAuth
+
 ## 0.3.3
 
 ### Patch Changes
