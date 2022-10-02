@@ -63,7 +63,8 @@
     "typescript": "^4.5.5"
   },
   "resolutions": {
-    "babel-plugin-remove-graphql-queries": "2.7.2"
+    "babel-plugin-remove-graphql-queries": "2.7.2",
+    "next": "12.2.4"
   },
   "preconstruct": {
     "packages": [
