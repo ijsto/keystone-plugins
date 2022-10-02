@@ -4,6 +4,12 @@
 
 ### Patch Changes
 
+- dd1a63d: update repo lnk
+
+## 0.3.4
+
+### Patch Changes
+
 - fb43d6c: docs - update root and OAuth
 
 ## 0.3.3
