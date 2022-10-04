@@ -57,6 +57,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
+        hideOnScroll: true,
         title: 'Plugins',
         logo: {
           alt: 'Keystone6 Plugins',
@@ -78,7 +79,6 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
         links: [
           {
             title: 'Docs',
@@ -116,6 +116,7 @@ const config = {
             ],
           },
         ],
+        style: 'dark',
         copyright: `© 2021-${new Date().getFullYear()}. From @ScottAgirs with ♥.`,
       },
       prism: {
