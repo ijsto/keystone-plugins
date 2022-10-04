@@ -118,7 +118,7 @@ const config = {
           },
         ],
         style: 'dark',
-        copyright: `© 2021-${new Date().getFullYear()}. Made with < />.`,
+        copyright: `© 2021-${new Date().getFullYear()}.`,
       },
       prism: {
         theme: lightCodeTheme,
