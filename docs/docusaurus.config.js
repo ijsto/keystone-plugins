@@ -37,7 +37,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/ijsto/keystone-plugins/docs/docs',
+            'https://github.com/ijsto/keystone-plugins/edit/main/docs',
         },
         // blog: {
         //   showReadingTime: true,
