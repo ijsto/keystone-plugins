@@ -1,0 +1,27 @@
+{
+    "globals": {
+        "React": true,
+        "google": true,
+        "mount": true,
+        "mountWithRouter": true,
+        "shallow": true,
+        "shallowWithRouter": true,
+        "context": true,
+        "expect": true,
+        "jsdom": true,
+        "JSX": true
+    },
+    "rules": {
+        "no-use-before-define": 0,
+        "import/no-unresolved": [
+            2,
+            {
+                "ignore": [
+                    "^@theme",
+                    "^@docusaurus",
+                    "^@site"
+                ]
+            }
+        ]
+    }
+}

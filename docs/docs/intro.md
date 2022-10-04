@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Introduction
 
+<!-- [![Twitter followers](https://img.shields.io/twitter/follow/ijstodev.svg?style=social&label=Follow)](https://twitter.com/ijstodev) -->
+
 :::warning
 
 Please note: we are currently in early stages of migrating this documentation. We will tweet once in Alpha, Beta and Stable. :)

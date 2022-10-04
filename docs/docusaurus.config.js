@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
@@ -6,13 +7,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Keystone6 Plugins',
-  tagline: ' ・ OAuth ・ ',
-  url: 'https://ijs.to',
   baseUrl: '/',
+  favicon: 'img/favicon.ico',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  tagline:
+    'Facebook, Google, Twitter, and other logins for your Keystone app. Quick, easy, and secure.',
+  title: 'Keystone6 OAuth',
+  url: 'https://ijs.to',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -33,11 +35,10 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/ijsto/keystone-plugins/edit/main/docs',
+          editUrl: 'https://github.com/ijsto/keystone-plugins/edit/main/docs',
+          sidebarPath: require.resolve('./sidebars.js'),
         },
         // blog: {
         //   showReadingTime: true,
@@ -70,7 +71,7 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {to: 'https://ijs.to/blog', label: 'Blog', position: 'left'},
+          { to: 'https://ijs.to/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/ijsto/keystone-plugins',
             label: 'GitHub',
@@ -117,7 +118,7 @@ const config = {
           },
         ],
         style: 'dark',
-        copyright: `© 2021-${new Date().getFullYear()}. From @ScottAgirs with ♥.`,
+        copyright: `© 2021-${new Date().getFullYear()}. Made with < />.`,
       },
       prism: {
         theme: lightCodeTheme,
