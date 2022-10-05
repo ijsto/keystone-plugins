@@ -2,6 +2,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const { npm2yarn2pnpm } = require('@sapphire/docusaurus-plugin-npm2yarn2pnpm');
+
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
@@ -38,6 +40,9 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/ijsto/keystone-plugins/edit/main/docs',
+          remarkPlugins: [npm2yarn2pnpm],
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
           sidebarPath: require.resolve('./sidebars.js'),
         },
         // blog: {

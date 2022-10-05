@@ -103,6 +103,7 @@ importers:
       '@docusaurus/types': ^2.1.0
       '@ijsto/eslint-config': ^4.4.2
       '@mdx-js/react': ^1.6.22
+      '@sapphire/docusaurus-plugin-npm2yarn2pnpm': ^1.1.3
       '@tsconfig/docusaurus': ^1.0.5
       '@types/react': ^17.0.38
       clsx: ^1.2.1
@@ -116,6 +117,7 @@ importers:
       '@docusaurus/core': 2.1.0_xlfn4bswcbemhquqxgtb7xipai
       '@docusaurus/preset-classic': 2.1.0_q6u6dn2g77r27bald3tn5rwbmy
       '@mdx-js/react': 1.6.22_react@17.0.2
+      '@sapphire/docusaurus-plugin-npm2yarn2pnpm': 1.1.3
       clsx: 1.2.1
       prism-react-renderer: 1.3.5_react@17.0.2
       react: 17.0.2
@@ -633,6 +635,11 @@ packages:
     resolution: {integrity: sha512-xCcXpoz52rI4ksJSdOCxeOCn2DLocxwHf9dVT/Q90Pte1LX+LY+91SFtJF3KXVHH8kEin+g1KKCQPKBjZJfWNA==}
     dependencies:
       xss: 1.0.14
+
+  /@armano/npm-to-yarn/1.1.3:
+    resolution: {integrity: sha512-qe3OXj/GivgkRcFZ2KQFDYfPW+qwOWvNXwIrw4u7g+R8WPmc8LzfV5NiEE8bxrIirD1A0oYerNsdyB9RrK1Ysw==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: false
 
   /@aws-crypto/crc32/2.0.0:
     resolution: {integrity: sha512-TvE1r2CUueyXOuHdEigYjIZVesInd9KN+K/TFFNfkkxRThiNxO6i4ZqqAVMoEjAamZZ1AA8WXJkjCz7YShHPQA==}
@@ -6365,6 +6372,14 @@ packages:
   /@rushstack/eslint-patch/1.2.0:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
+
+  /@sapphire/docusaurus-plugin-npm2yarn2pnpm/1.1.3:
+    resolution: {integrity: sha512-wbTVwK3xGSD4Zu1gxHH86/XJ0HzI+jp8cB1g8Lh9+pqWN7uv3OnNwoCo/qGUBl6in5OvTVocq/lyq7Mwcrv+Eg==}
+    engines: {node: '>=v16.6.0', npm: '>=7.0.0'}
+    dependencies:
+      '@armano/npm-to-yarn': 1.1.3
+      unist-util-visit: 2.0.3
+    dev: false
 
   /@sideway/address/4.1.4:
     resolution: {integrity: sha512-7vwq+rOHVWjyXxVlR76Agnvhy8I9rpzjosTESvmhNeXOXdZZB15Fl+TI9x1SiHZH5Jv2wTGduSxFDIaq0m3DUw==}
