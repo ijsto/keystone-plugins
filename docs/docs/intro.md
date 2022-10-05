@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 0
 ---
 
 # Introduction
@@ -13,121 +13,32 @@ Follow [@scottagirs](https://twitter.com/scottagirs), [Josh Calder](https://twit
 
 :::
 
-# Getting Started
+# About Keystone-6-oauth
 
-Below are instructions for getting started with Keystone6 OAuth.
-
-In the future, other plugins will be added to this repository.
+This uses NextAuth.js (https://next-auth.js.org/) project to add social auth to Keystone-6 (https://keystonejs.com/).
 
 ## What you'll need
 
 - [Node.js](https://nodejs.org/en/download/) version 16.13 or above
 - [Keystone6](https://keystonejs.com/) project
 
-## Installation
+## Flexible and easy to use
+- designed to work with any OAuth service, it supports OAuth 1.0, 1.0A, 2.0 and OpenID Connect (same as NextAuth)
+- built-in support for many popular sign-in services
+- supports email / passwordless authentication
+- supports customization and provides ability to manipulate what is stored in the database via `resolver` function.
 
-To install run the following command in your Keystone6 project:
+## Accessible and open source
+- see Recipes for examples of how to use it in different scenarios
+- video tutorials by the team and the Keystone community members
+- contribute to improve the project by submitting a [new issue](https://github.com/ijsto/keystone-plugins/issues/new) and [pull requests](https://github.com/ijsto/keystone-plugins/pulls).
 
-```bash
-yarn add keystone-6-oauth
-```
+## Credits
+This package is only possible because of:
+- the work done by [NextAuth.js](https://next-auth.js.org/) folks.
+- the ground work done by the original author [Josh Calder](https://github.com/borisno2)
 
-## Usage
+## Getting Started
 
-Once installed, you will need to modify your Keystone config (by default at `./keystone.js`) file.
+Check out the Getting Started for installation and usage.
 
-### Import `createAuth`
-
-```javascript
-// ./keystone.ts
-import { createAuth } from "keystone-6-oauth"; // Added this
-// ...
-```
-
-### Import Provider of your choice
-
-```javascript
-// ./keystone.ts
-import { createAuth } from "keystone-6-oauth";
-import Facebook from "keystone-6-oauth/providers/Facebook"; // Added this
-```
-
-### Session Secret
-
-<!-- TODO: Add description about session secret -->
-
-Define `sessionSection` and handler to ensure it is present.
-
-```javascript
-// ./keystone.ts
-import { createAuth } from "keystone-6-oauth";
-
-// ...
-
-let sessionSecret = process.env.SESSION_SECRET;
-
-if (!sessionSecret) {
-  if (process.env.NODE_ENV === "production") {
-    throw new Error(
-      "The SESSION_SECRET environment variable must be set in production"
-    );
-  } else {
-    sessionSecret = "-- DEV COOKIE SECRET; CHANGE ME --";
-  }
-}
-```
-
-### Configure Keystone
-
-Configure Keystone auth, including providers for Provider. For documentation on Providers and their API & options see https://next-auth.js.org/providers/.
-
-To use a given Provider, replace `next-auth/providers` with `keystone-6-oauth/providers`
-
-```javascript
-import { createAuth } from "keystone-6-oauth";
-import Facebook from "keystone-6-oauth/providers/Facebook";
-
-// ...
-
-const auth = createAuth({
-  listKey: 'User',
-  identityField: 'subjectId',
-  sessionData: `id name email`,
-  autoCreate: true,
-  resolver: async (props: any) => {
-    const username = props.user.name as string;
-    const email = props.user.email as string;
-
-    return { email, username };
-  },
-  keystonePath: '/admin',
-  sessionSecret,
-  providers: [
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID || "NextAuthClientID",
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "NextAuthClientSecret",
-    }),
-]
-});
-```
-
-### Final step
-
-Wrap your keystone config in `auth.withAuth()`.
-
-```javascript
-export default auth.withAuth(
-  config({
-    db: {},
-    lists,
-    // ...
-  });
-```
-
-<!-- TODO: ... -->
-
-## Next.js setup
-
-<!-- TODO: -->
-
-> NEXT.JS SETUP GUIDE IS COMING SOON.

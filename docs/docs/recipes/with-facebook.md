@@ -6,19 +6,13 @@ sidebar_position: 1
 
 This recipe will guide you through the process of adding Facebook OAuth to your Keystone project.
 
-:::caution
-
-Caveat:
-
-:::
-
 ## Resolver
 
 To learn more about resolvers see Resolvers API Reference.
 
 Modify the `withAuth°:
 
-```js title="By default in keystone.js"
+```js showLineNumbers title="keystone.js"
   const auth = createAuth({
     // ...
     resolver: async (props: any) => {
