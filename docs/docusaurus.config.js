@@ -78,6 +78,11 @@ const config = {
           },
           { to: 'https://ijs.to/blog', label: 'Blog', position: 'left' },
           {
+            to: 'https://www.npmjs.com/package/keystone-6-oauth',
+            label: 'npm',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/ijsto/keystone-plugins',
             label: 'GitHub',
             position: 'right',

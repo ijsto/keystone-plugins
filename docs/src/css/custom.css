@@ -1,10 +1,11 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+* Any CSS included here will be global. The classic template
+* bundles Infima by default. Infima is a CSS framework designed to
+* work well for content-centric websites.
+*/
 
- @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;400;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import "navbar.css";
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;400;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 /* You can override the default Infima variables here. */
 :root {
