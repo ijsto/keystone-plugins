@@ -6,17 +6,10 @@ sidebar_position: 0
 
 <!-- [![Twitter followers](https://img.shields.io/twitter/follow/ijstodev.svg?style=social&label=Follow)](https://twitter.com/ijstodev) -->
 
-:::warning
-
-Please note: this documentation is currently in its very infancy.
-
-For updates follow [@scottagirs](https://twitter.com/scottagirs), [Josh Calder](https://twitter.com/OpenSaasAU) or [@ijsto](https://twitter.com/ijstodev) on Twitter.
-
-:::
 
 # About Keystone-6-oauth
 
-Easily add third-party authentication providers to your Keystone6 app. Under the covers we use NextAuth.js (https://next-auth.js.org/) project to add social auth to Keystone-6 (https://keystonejs.com/).
+Easily add third-party authentication providers to your Keystone6 app. Under the covers we use [NextAuth.js](https://next-auth.js.org/).
 
 ## What you'll need
 
@@ -43,3 +36,10 @@ This package is only possible because of:
 
 Check out the Getting Started for installation and usage.
 
+:::warning
+
+Please note: this documentation is currently in its very infancy.
+
+For updates follow [@scottagirs](https://twitter.com/scottagirs), [Josh Calder](https://twitter.com/OpenSaasAU) or [@ijsto](https://twitter.com/ijstodev) on Twitter.
+
+:::
