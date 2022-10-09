@@ -1,0 +1,82 @@
+---
+sidebar_position: 2
+---
+
+import { ApiOption } from '@site/src/components/ApiOption';
+
+# Core
+
+:::info Hola 👋🏼
+
+[PRs to improve docs or the package](https://github.com/ijsto/keystone-plugins/pulls) will be much appreciated.
+
+:::
+
+## <ApiOption optional usage="/docs/category/configuration">createAuth()</ApiOption>
+
+The `createAuth()` function is used to create an instance of the Auth module. It accepts an object with configuration properties. You can see below the a full list.
+
+--- 
+
+
+## <ApiOption optional usage="/docs/category/configuration">autoCreate</ApiOption>
+
+
+<!-- ### cookies Q: Shd we add this for demo? -->
+--- 
+
+
+## <ApiOption default="subjectId" usage="/docs/category/configuration">identityField</ApiOption>
+
+Field name that will be used to map your Authenticated Item to the Auth database.
+
+--- 
+
+
+## <ApiOption optional>keystonePath</ApiOption>
+
+Path to your Keystone admin panel.
+--- 
+
+## <ApiOption usage="/docs/category/configuration">listKey</ApiOption>
+
+Maps the table in your database to the `authenticatedItem`.
+--- 
+
+
+## <ApiOption optional type="object">pages</ApiOption>
+
+Please see [NextAuth Pages](https://next-auth.js.org/configuration/pages) for more information.
+
+<!-- TODO: Add more info -->
+--- 
+
+
+## <ApiOption type="array" usage="/docs/configuration/providers">providers</ApiOption>
+
+For now, please refer to [NextAuth Providers](https://next-auth.js.org/configuration/providers/oauth).
+
+--- 
+
+
+## <ApiOption optional type="async function">resolver</ApiOption>
+--- 
+
+
+## <ApiOption type="graphql query string">sessionData</ApiOption>
+
+Defines what data will be returned in the `session` object when user is authenticated.
+
+--- 
+
+
+## <ApiOption usage="/docs/category/configuration">sessionSecret</ApiOption>
+
+String used to encrypt your users' sessions.
+
+--- 
+
+
+## <ApiOption optional usage="/docs/category/configuration">...</ApiOption>
+
+<!-- TODO: Add more info -->
