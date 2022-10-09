@@ -2,14 +2,29 @@
 sidebar_position: 2
 ---
 
-# Installation
+# Keystone6 setup
+
+:::tip Please note
+
+You will need Keystone6 `v3.0.0` or higher to use this plugin.
+
+:::
+
+## Installation
+
+
+:::caution PNPM
+
+PNPM manager currently is not fully tested and we have noticed some issues with it. We recommend using NPM or Yarn for now.
+
+:::
 
 To install run the following command in your Keystone6 project:
 
 ```bash npm2yarn2pnpm
 npm install keystone-6-oauth
 ```
-
+ 
 ## Usage
 
 Once installed, you will need to modify your Keystone config (by default at `./keystone.js`) file.
