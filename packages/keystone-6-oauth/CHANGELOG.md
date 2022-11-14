@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.4.0
+
+### Minor Changes
+
+- c02be20: Add onSignIn and onSignUp methods
+
 ## 0.3.4
 
 ### Patch Changes
