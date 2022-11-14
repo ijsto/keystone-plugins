@@ -53,7 +53,7 @@ export const ApiOption = ({
         zIndex: '1',
       }}
     >
-      <code>{children}</code>
+      <span>{children}</span>
 
       {infoItems && (
         <span
@@ -85,7 +85,12 @@ export const ApiOption = ({
               <span
                 key={`i-i-${index}`}
                 style={{
-                  color: item === 'required' ? 'red' : '#9d87a2',
+                  color:
+                    item === 'required'
+                      ? 'red'
+                      : item === 'optional'
+                      ? 'green'
+                      : '#9d87a2',
                   fontSize: '0.5em',
                   fontWeight: 500,
                   marginLeft: '4px',
