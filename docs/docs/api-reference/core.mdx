@@ -15,7 +15,7 @@ The `createAuth()` function is used to create an instance of the Auth module. It
 --- 
 
 
-### <ApiOption optional usage="/docs/category/configuration">autoCreate</ApiOption>
+### <ApiOption optional type="boolean" usage="/docs/category/configuration">autoCreate</ApiOption>
 
 
 <!-- ### cookies Q: Shd we add this for demo? -->
@@ -35,6 +35,17 @@ Path to your Keystone admin panel.
 --- 
 
 ### <ApiOption usage="/docs/category/configuration">listKey</ApiOption>
+--- 
+
+### <ApiOption optional type="async function">onSignIn</ApiOption>
+Useful for operations that needs to be run when a user logs into their account.
+
+With this method we return `query` and provider return data. These two return values will give you full flexibility to interact with Keystone DB via GraphQL query and provider data.
+
+--- 
+
+### <ApiOption optional type="async function">onSignUp</ApiOption>
+Useful for operations that needs to be run when user first signs up. For example, you can use this to create a new user in your database if they don't exist.
 
 Maps the table in your database to the `authenticatedItem`.
 --- 
@@ -56,6 +67,11 @@ For now, please refer to [NextAuth Providers](https://next-auth.js.org/configura
 
 
 ### <ApiOption optional type="async function">resolver</ApiOption>
+
+Useful for operations that needs to be run everytime a user is authenticated.
+
+**NOTE**: If `autoCreate` is set to `false` and `authenticatedItem` does not exist, **<code>resolver</code> will not be called**.
+
 --- 
 
 

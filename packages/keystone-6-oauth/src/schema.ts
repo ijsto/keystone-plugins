@@ -9,10 +9,10 @@ export const getSchemaExtension = ({
   identityField: string;
   listKey: string;
 }): ExtendGraphqlSchema =>
-  graphql.extend((base) => {
+  graphql.extend(base => {
     const baseSchema = getBaseAuthSchema({
-      listKey,
       base,
+      listKey,
     });
 
     return [baseSchema.extension].filter(

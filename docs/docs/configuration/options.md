@@ -8,7 +8,7 @@ sidebar_position: 2
 
 ### `SESSION_SECRET`
 
-`SESSION_SECRET="S|_|P3R_S3CR3T-GPX-3O0O"`
+`SESSION_SECRET="S0_S3CR3T-GPX-3O0O"`
 
 ### `FRONTEND_URL`
 
@@ -30,6 +30,14 @@ With the recommended configuration of Keystone, NextAuth.js this should be your 
 
 Coming soon.
 <!-- TODO: @borisno2 -->
+
+## onSignIn
+- Default value: `undefined`
+- Required: No
+
+## onSignUp
+- Default value: `undefined`
+- Required: No
 
 ## pages
 - Default value: {}

@@ -1,5 +1,5 @@
-import ejs from "ejs";
-import { NextAuthTemplateProps } from "../pages/NextAuthPage";
+import ejs from 'ejs';
+import { NextAuthTemplateProps } from '../pages/NextAuthPage';
 
 const template = `
 import getNextAuthPage from 'keystone-6-oauth/pages/NextAuthPage';
@@ -32,10 +32,10 @@ export const authTemplate = ({
   sessionSecret,
 }: NextAuthTemplateProps) => {
   const authOut = ejs.render(template, {
-    identityField,
-    sessionData,
-    listKey,
     autoCreate,
+    identityField,
+    listKey,
+    sessionData,
     sessionSecret,
   });
   return authOut;
