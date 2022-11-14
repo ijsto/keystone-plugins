@@ -1,4 +1,4 @@
-import type { KeystoneListsAPI } from '@keystone-6/core/types';
+import type { BaseItem, KeystoneListsAPI } from '@keystone-6/core/types';
 import { NextAuthErrorCode } from '../types';
 import { findMatchingIdentity } from './findMatchingIdentity';
 
@@ -8,8 +8,8 @@ export async function validateNextAuth(
   protectIdentities: boolean,
   itemAPI: KeystoneListsAPI<any>[string]
 ): Promise<
-  | { success: false; code: NextAuthErrorCode }
-  | { success: true; item: { id: any; [prop: string]: any } }
+  | { success: false; item?: any; code: NextAuthErrorCode }
+  | { success: true; item: BaseItem }
 > {
   const match = await findMatchingIdentity(identityField, identity, itemAPI);
 
@@ -19,10 +19,11 @@ export async function validateNextAuth(
   };
 
   if (item) {
-    return { success: true, item };
+    return { item, success: true };
   }
+
   return {
-    success: false,
     code: protectIdentities ? 'FAILURE' : 'SUBJECT_NOT_FOUND',
+    success: false,
   };
 }
