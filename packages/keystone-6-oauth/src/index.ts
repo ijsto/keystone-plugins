@@ -278,7 +278,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     if (keystoneConfig.ui) {
       ui = {
         ...keystoneConfig.ui,
-        enableSessionItem: true,
         getAdditionalFiles: [
           ...(keystoneConfig.ui?.getAdditionalFiles || []),
           getAdditionalFiles,
@@ -326,7 +325,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
       cookies,
       experimental: {
         ...keystoneConfig.experimental,
-        generateNodeAPI: true,
       },
       extendGraphqlSchema: existingExtendGraphQLSchema
         ? schema => existingExtendGraphQLSchema(extendGraphqlSchema(schema))
@@ -344,14 +342,5 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     };
   };
 
-  return {
-    withAuth,
-    // In the future we may want to return the following so that developers can
-    // roll their own. This is pending a review of the use cases this might be
-    // appropriate for, along with documentation and testing.
-    // ui: { enableSessionItem: true, pageMiddleware, getAdditionalFiles, publicPages },
-    // fields,
-    // extendGraphqlSchema,
-    // validateConfig,
-  };
+  return { withAuth };
 }
