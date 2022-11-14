@@ -35,6 +35,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   identityField,
   listKey,
   keystonePath,
+  onSignIn,
+  onSignUp,
   pages,
   resolver,
   providers,
@@ -57,6 +59,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
    *  - to the init page when initFirstItem is configured, and there are no user in the database
    *  - to the signin page when no valid session is present
    */
+  // TODO: Check pageMiddleware types
   const pageMiddleware: AdminUIConfig<BaseKeystoneTypeInfo>['pageMiddleware'] =
     async ({ context, isValidSession }) => {
       const { req, session } = context;
@@ -97,7 +100,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
    * This function adds files to be generated into the Admin UI build. Must be added to the
    * ui.getAdditionalFiles config.
    *
-   * The signin page is always included, and the init page is included when initFirstItem is set
+   * The sign-in page is always included, and the init page is included when initFirstItem is set
    */
   const getAdditionalFiles = () => {
     const filesToWrite: AdminFileToWrite[] = [
@@ -167,9 +170,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
       throw new Error(msg);
     }
 
-    // TODO: Check if providers
-    // TODO: Check other required commands/data
-
     // TODO: Check for String-like typing for identityField? How?
     // TODO: Validate that the identifyField is unique.
     // TODO: If this field isn't required, what happens if I try to log in as `null`?
@@ -219,7 +219,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
         const pathname = url.parse(req?.url!).pathname!;
         let nextSession: Session;
         if (pathname.includes('/api/auth')) {
-          return;
+          return null;
         }
         const sudoContext = createContext({ sudo: true });
 
@@ -240,7 +240,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           !sudoContext.query[listKey] ||
           !nextSession.itemId
         ) {
-          return;
+          return null;
         }
         const reqWithUser = req as any;
         reqWithUser.user = {
@@ -255,8 +255,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           ...userSession,
           ...nextSession,
           data: nextSession.data,
-          listKey: nextSession.listKey,
           itemId: nextSession.itemId,
+          listKey: nextSession.listKey,
         };
       },
     };
@@ -307,7 +307,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
             : context.session !== undefined;
         },
         pageMiddleware: async args =>
-          (await pageMiddleware(args)) ??
+          // TODO: Review - do we need to check and throw Error if pageMiddleware is undefined?
+          (pageMiddleware && (await pageMiddleware(args))) ??
           keystoneConfig?.ui?.pageMiddleware?.(args),
         publicPages: [...(keystoneConfig.ui.publicPages || []), ...publicPages],
       };
@@ -333,6 +334,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
       lists: {
         ...keystoneConfig.lists,
       },
+      onSignIn,
+      onSignUp,
       pages,
       providers,
       resolver,
