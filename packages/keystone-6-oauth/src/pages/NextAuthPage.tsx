@@ -9,6 +9,8 @@ import { Provider } from 'next-auth/providers';
 import { JWTOptions } from 'next-auth/jwt';
 import { validateNextAuth } from '../lib/validateNextAuth';
 
+import { OAuthCallbacks } from '../types';
+
 export type NextAuthTemplateProps = {
   autoCreate: boolean;
   identityField: string;
@@ -17,34 +19,13 @@ export type NextAuthTemplateProps = {
   sessionSecret: string;
 };
 
-export type OAuthCallbacks = {
-  // TODO: Review definition of this type
-  // eslint-disable-next-line no-unused-vars
-  onSignIn?: (args: {
-    account: any;
-    profile: any;
-    context: KeystoneContext;
-    user: any;
-  }) => Promise<void>;
-  // TODO: Review definition of this type
-  // eslint-disable-next-line no-unused-vars
-  onSignUp?: (args: {
-    account: any;
-    created?: any;
-    profile: any;
-    context: KeystoneContext;
-    user: any;
-  }) => Promise<void>;
-};
-
 export type CoreNextAuthPageProps = {
   cookies?: Partial<CookiesOptions>;
   events?: Partial<EventCallbacks>;
   jwt?: Partial<JWTOptions>;
   pages?: Partial<PagesOptions>;
   providers: Provider[];
-} & NextAuthTemplateProps &
-  OAuthCallbacks;
+} & NextAuthTemplateProps & OAuthCallbacks;
 
 export type NextAuthPageProps = CoreNextAuthPageProps & {
   context: KeystoneContext;
@@ -94,15 +75,19 @@ export default function NextAuthPage(props: NextAuthPageProps) {
           list
         );
 
-        let tokenItemId;
-        
         if (!nextAuthValidationResult.success) {
-          tokenItemId = null;
+          token.itemId = undefined;
         } else {
           token.itemId = nextAuthValidationResult.item.id;
+
+          if (!token.itemId) {
+            console.error("NextAuthPage: Couldn't find itemId in token.", { nextAuthValidationResult, token});
+            throw new Error('No itemId found in token');
+          }
+          
           const data = await context.query[listKey].findOne({
             query: sessionData || 'id',
-            where: { id: tokenItemId }, // TODO: Q: is `tokenItemId` the same as `Authenticated.id`?
+            where: { id: token.itemId as string }, // TODO: Q: is `tokenItemId` the same as `Authenticated.id`?
           });
           token.data = data;
         }
