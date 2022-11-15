@@ -8,34 +8,7 @@ import type { KeystoneContext } from '@keystone-6/core/types';
 import { Provider } from 'next-auth/providers';
 import { JWTOptions } from 'next-auth/jwt';
 import { validateNextAuth } from '../lib/validateNextAuth';
-
-export type NextAuthTemplateProps = {
-  autoCreate: boolean;
-  identityField: string;
-  listKey: string;
-  sessionData: string | undefined;
-  sessionSecret: string;
-};
-
-export type OAuthCallbacks = {
-  // TODO: Review definition of this type
-  // eslint-disable-next-line no-unused-vars
-  onSignIn?: (args: {
-    account: any;
-    profile: any;
-    context: KeystoneContext;
-    user: any;
-  }) => Promise<void>;
-  // TODO: Review definition of this type
-  // eslint-disable-next-line no-unused-vars
-  onSignUp?: (args: {
-    account: any;
-    created?: any;
-    profile: any;
-    context: KeystoneContext;
-    user: any;
-  }) => Promise<void>;
-};
+import { NextAuthTemplateProps, OAuthCallbacks } from '../types';
 
 export type CoreNextAuthPageProps = {
   cookies?: Partial<CookiesOptions>;

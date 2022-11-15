@@ -1,5 +1,5 @@
 import ejs from 'ejs';
-import { NextAuthTemplateProps } from '../pages/NextAuthPage';
+import { NextAuthTemplateProps } from '../types';
 
 const template = `
 import { getContext } from '@keystone-6/core/context';
