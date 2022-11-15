@@ -1,29 +1,8 @@
-/* eslint-disable no-param-reassign */
-import NextAuth, {
-  CookiesOptions,
-  EventCallbacks,
-  PagesOptions,
-} from 'next-auth';
-import type { KeystoneContext } from '@keystone-6/core/types';
-import { Provider } from 'next-auth/providers';
-import { JWTOptions } from 'next-auth/jwt';
+import NextAuth from 'next-auth';
+
 import { validateNextAuth } from '../lib/validateNextAuth';
+import { NextAuthPageProps } from '../types';
 
-import { NextAuthTemplateProps, OAuthCallbacks } from '../types';
-
-export type CoreNextAuthPageProps = {
-  cookies?: Partial<CookiesOptions>;
-  events?: Partial<EventCallbacks>;
-  jwt?: Partial<JWTOptions>;
-  pages?: Partial<PagesOptions>;
-  providers: Provider[];
-} & NextAuthTemplateProps & OAuthCallbacks;
-
-export type NextAuthPageProps = CoreNextAuthPageProps & {
-  context: KeystoneContext;
-};
-
-// eslint-disable-next-line react/function-component-definition
 export default function NextAuthPage(props: NextAuthPageProps) {
   const {
     autoCreate,

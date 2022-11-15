@@ -1,4 +1,3 @@
-import url from 'url';
 import {
   AdminFileToWrite,
   BaseListTypeInfo,
@@ -8,19 +7,22 @@ import {
   BaseKeystoneTypeInfo,
   SessionStrategy,
 } from '@keystone-6/core/types';
-import { getSession } from 'next-auth/react';
-import { getToken, JWT } from 'next-auth/jwt';
-import { Provider } from 'next-auth/providers';
 
 import * as cookie from 'cookie';
 
 import { Session } from 'next-auth';
+import { getSession } from 'next-auth/react';
+import { getToken, JWT } from 'next-auth/jwt';
+import { Provider } from 'next-auth/providers';
+
 import { nextConfigTemplate } from './templates/next-config';
-// import * as Path from 'path';
+import { authTemplate } from './templates/auth';
+
+import { getSchemaExtension } from './schema';
 
 import { AuthConfig, KeystoneOAuthConfig, AuthSessionStrategy } from './types';
-import { getSchemaExtension } from './schema';
-import { authTemplate } from './templates/auth';
+
+import url from 'url';
 
 /**
  * createAuth function
@@ -28,7 +30,14 @@ import { authTemplate } from './templates/auth';
  * Generates config for Keystone to implement standard auth features.
  */
 
-export type { NextAuthProviders, KeystoneOAuthConfig } from './types';
+export type { 
+  NextAuthProviders,
+  KeystoneOAuthConfig,
+  KeystoneOAuthCallbacks,
+  KeystoneOAuthOnSignIn,
+  KeystoneOAuthOnSignUp
+ } from './types'; 
+
 export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   autoCreate,
   context,
