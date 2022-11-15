@@ -16,6 +16,7 @@ The `createAuth()` function is used to create an instance of the Auth module. It
 
 
 ### <ApiOption optional type="boolean" usage="/docs/category/configuration">autoCreate</ApiOption>
+**Default**: `true`
 
 
 <!-- ### cookies Q: Shd we add this for demo? -->
@@ -53,7 +54,8 @@ Maps the table in your database to the `authenticatedItem`.
 
 ### <ApiOption optional type="object">pages</ApiOption>
 
-Please see [NextAuth Pages](https://next-auth.js.org/configuration/pages) for more information.
+Allows you to customize the pages that are rendered by the callbacks.
+See [Pages options](/docs/configuration/pages) for usage.
 
 <!-- TODO: Add more info -->
 --- 
@@ -64,16 +66,6 @@ Please see [NextAuth Pages](https://next-auth.js.org/configuration/pages) for mo
 For now, please refer to [NextAuth Providers](https://next-auth.js.org/configuration/providers/oauth).
 
 --- 
-
-
-### <ApiOption optional type="async function">resolver</ApiOption>
-
-Useful for operations that needs to be run everytime a user is authenticated.
-
-**NOTE**: If `autoCreate` is set to `false` and `authenticatedItem` does not exist, **<code>resolver</code> will not be called**.
-
---- 
-
 
 ### <ApiOption type="graphql query string">sessionData</ApiOption>
 

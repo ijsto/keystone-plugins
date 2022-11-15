@@ -8,8 +8,9 @@ import {
   BaseListTypeInfo,
   KeystoneConfig,
   CreateContext,
+  KeystoneContext,
 } from '@keystone-6/core/types';
-import { NextAuthCallbackOptions } from './pages/NextAuthPage';
+import { OAuthCallbacks } from './pages/NextAuthPage';
 
 type NextAuthResponse = IncomingMessage & NextRequest;
 
@@ -39,12 +40,13 @@ export declare type AuthSessionStrategy<StoredSessionData> = {
 export type NextAuthProviders = Provider[];
 
 type KeystoneOAuthOptions = {
+  context: KeystoneContext;
   providers: NextAuthProviders;
   pages?: Partial<PagesOptions>;
 };
 type NextAuthOptions = {
   cookies?: Partial<CookiesOptions>;
-} & NextAuthCallbackOptions;
+} & OAuthCallbacks;
 
 export type KeystoneOAuthConfig = KeystoneConfig &
   KeystoneOAuthOptions &
@@ -55,6 +57,8 @@ export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   autoCreate: boolean;
   /** Adds ability to customize cookie options, for example, to facilitate cross-subdomain functionality */
   cookies?: Partial<CookiesOptions>;
+  /** KeystoneContext */
+  context: KeystoneContext;
   /** The key of the list to authenticate users with */
   listKey: GeneratedListTypes['key'];
   /** The path of the field the identity is stored in; must be text-ish */
@@ -69,7 +73,7 @@ export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   sessionData?: string | undefined;
   /** Next-Auth Session Secret */
   sessionSecret: string;
-} & NextAuthCallbackOptions;
+} & OAuthCallbacks;
 
 export type AuthTokenRequestErrorCode =
   | 'IDENTITY_NOT_FOUND'

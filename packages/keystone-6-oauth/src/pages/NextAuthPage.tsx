@@ -4,7 +4,7 @@ import NextAuth, {
   EventCallbacks,
   PagesOptions,
 } from 'next-auth';
-import type { KeystoneListsAPI } from '@keystone-6/core/types';
+import type { KeystoneContext } from '@keystone-6/core/types';
 import { Provider } from 'next-auth/providers';
 import { JWTOptions } from 'next-auth/jwt';
 import { validateNextAuth } from '../lib/validateNextAuth';
@@ -17,13 +17,13 @@ export type NextAuthTemplateProps = {
   sessionSecret: string;
 };
 
-export type NextAuthCallbackOptions = {
+export type OAuthCallbacks = {
   // TODO: Review definition of this type
   // eslint-disable-next-line no-unused-vars
   onSignIn?: (args: {
     account: any;
     profile: any;
-    query: any; // TODO: Can we get KS query type here?
+    context: KeystoneContext;
     user: any;
   }) => Promise<void>;
   // TODO: Review definition of this type
@@ -32,19 +32,9 @@ export type NextAuthCallbackOptions = {
     account: any;
     created?: any;
     profile: any;
-    query: any; // TODO: Can we get KS query type here?
+    context: KeystoneContext;
     user: any;
   }) => Promise<void>;
-  // TODO: Review definition of this type
-  // eslint-disable-next-line no-unused-vars
-  resolver?: (args: {
-    account: any;
-    profile: any;
-    query: any; // TODO: Can we get KS query type here?
-    user: any;
-  }) => Promise<{
-    [key: string]: boolean | string | number;
-  }>;
 };
 
 export type CoreNextAuthPageProps = {
@@ -54,10 +44,10 @@ export type CoreNextAuthPageProps = {
   pages?: Partial<PagesOptions>;
   providers: Provider[];
 } & NextAuthTemplateProps &
-  NextAuthCallbackOptions;
+  OAuthCallbacks;
 
 export type NextAuthPageProps = CoreNextAuthPageProps & {
-  query: KeystoneListsAPI<any>;
+  context: KeystoneContext;
 };
 
 // eslint-disable-next-line react/function-component-definition
@@ -73,15 +63,14 @@ export default function NextAuthPage(props: NextAuthPageProps) {
     onSignUp,
     pages,
     providers,
-    query,
-    resolver,
+    context,
     sessionData,
     sessionSecret,
   } = props;
 
-  if (!query) {
+  if (!context) {
     // eslint-disable-next-line no-console
-    console.error('NextAuthPage got no query.');
+    console.error('NextAuthPage got no context.');
     return null;
   }
 
@@ -91,7 +80,7 @@ export default function NextAuthPage(props: NextAuthPageProps) {
     return null;
   }
 
-  const list = query[listKey];
+  const list = context.query[listKey];
   const protectIdentities = true;
 
   return NextAuth({
@@ -105,13 +94,15 @@ export default function NextAuthPage(props: NextAuthPageProps) {
           list
         );
 
+        let tokenItemId;
+        
         if (!nextAuthValidationResult.success) {
-          token.itemId = null;
+          tokenItemId = null;
         } else {
           token.itemId = nextAuthValidationResult.item.id;
-          const data = await query[listKey].findOne({
+          const data = await context.query[listKey].findOne({
             query: sessionData || 'id',
-            where: { id: token.itemId },
+            where: { id: tokenItemId }, // TODO: Q: is `tokenItemId` the same as `Authenticated.id`?
           });
           token.data = data;
         }
@@ -137,18 +128,19 @@ export default function NextAuthPage(props: NextAuthPageProps) {
           itemId: token.itemId as string,
           listKey: token.listKey as string,
           subject: token.sub,
-        };
+        } as any; // TODO: [TYPES] Add typings?
 
         return returnSession;
       },
+      // @ts-ignore
       async signIn({ user, account, profile, ...rest }) {
+        // TODO: @borisno2 - pls review the identity logic
         let identity;
         if (typeof user.id === 'string') {
           identity = user.id;
         } else if (typeof user.id === 'number') {
           identity = user.id;
         } else {
-          // TODO: Review logic
           identity = 0;
         }
 
@@ -159,34 +151,6 @@ export default function NextAuthPage(props: NextAuthPageProps) {
           list
         );
 
-        // Resolver gets called every tme authentication is fired.
-        // TODO: Review - this may not work if `autoCreate` is set to `false`, in which case there would be no user to update.
-        if (resolver) {
-          const userProvidedResolverResponse = resolver
-            ? await resolver({ account, profile, query, user, ...rest })
-            : {};
-
-          const data: any = {
-            [identityField]: identity,
-            ...userProvidedResolverResponse,
-          };
-
-          const updateAuthenticatedItem = await list
-            .updateOne({
-              data,
-              where: { id: nextAuthValidationResult.item.id },
-            })
-            .then(returned => ({ success: true, user: returned }))
-            .catch(error => {
-              // eslint-disable-next-line no-console
-              console.error(error);
-              throw new Error(error);
-            });
-
-          if (!updateAuthenticatedItem.success)
-            throw new Error('Unable to fulfill user update from resolver');
-        }
-
         // Authenticated Item is not found (does not exist) - so we create a new if is `autoCreate=true`.
         if (!nextAuthValidationResult.success) {
           if (!autoCreate) {
@@ -194,17 +158,15 @@ export default function NextAuthPage(props: NextAuthPageProps) {
           }
 
           const userProvidedSignUpFields = onSignUp
-            ? await onSignUp({ account, profile, query, user, ...rest })
+            ? await onSignUp({ account, context, profile, user, ...rest })
             : {};
 
-          // ID
           const data: any = {
             [identityField]: identity,
             ...userProvidedSignUpFields,
           };
 
           const createUser = await list
-            // TODO: Look into what happens if fields are required, for example, if `username` is required, we may need to provide some feedback why it fails.
             .createOne({ data })
             .then(returned => ({ success: true, user: returned }))
             .catch(error => {
@@ -218,16 +180,18 @@ export default function NextAuthPage(props: NextAuthPageProps) {
 
         // if nextAuthValidationResult.success is true, we have an authenticated item, and we sign in with optional `onSignIn` resolver.
         if (onSignIn) {
-          await onSignIn({
+          // TODO: Add docs that developer needs to return true or false from `onSignIn` resolver.
+          // Could have a flag in DB (eg. `disabledUser` etc) - Josh 🚀
+          return await onSignIn({
             account,
+            context,
             profile,
-            query,
             user,
             ...rest,
           });
         }
 
-        return true;
+        return true
       },
     },
     cookies,
