@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.5.5
+
+### Patch Changes
+
+- 1027082: chore move types
+
 ## 0.5.4
 
 ### Patch Changes
