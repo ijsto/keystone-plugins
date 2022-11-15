@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.5.6
+
+### Patch Changes
+
+- 127b601: Types - wip - optimize
+
 ## 0.5.5
 
 ### Patch Changes
