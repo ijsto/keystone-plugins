@@ -1,0 +1,4 @@
+{
+    "main": "dist/keystone-6-oauth-pages-NextAuthPage.cjs.js",
+    "module": "dist/keystone-6-oauth-pages-NextAuthPage.esm.js"
+}
