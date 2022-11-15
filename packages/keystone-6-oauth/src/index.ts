@@ -215,6 +215,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           })
         );
       },
+      // TODO: [TYPES] Add get typing
+      // @ts-ignore
       get: async ({ req, createContext }) => {
         const pathname = url.parse(req?.url!).pathname!;
         // TODO 
