@@ -10,7 +10,27 @@ import {
   CreateContext,
   KeystoneContext,
 } from '@keystone-6/core/types';
-import { OAuthCallbacks } from './pages/NextAuthPage';
+
+
+export type OAuthCallbacks = {
+  // TODO: Review definition of this type
+  // eslint-disable-next-line no-unused-vars
+  onSignIn?: (args: {
+    account: any;
+    profile: any;
+    context: KeystoneContext;
+    user: any;
+  }) => Promise<void>;
+  // TODO: Review definition of this type
+  // eslint-disable-next-line no-unused-vars
+  onSignUp?: (args: {
+    account: any;
+    created?: any;
+    profile: any;
+    context: KeystoneContext;
+    user: any;
+  }) => Promise<void>;
+};
 
 type NextAuthResponse = IncomingMessage & NextRequest;
 
@@ -40,9 +60,12 @@ export declare type AuthSessionStrategy<StoredSessionData> = {
 export type NextAuthProviders = Provider[];
 
 type KeystoneOAuthOptions = {
+  /** KeystoneContext */
   context: KeystoneContext;
-  providers: NextAuthProviders;
+  // Custom pages for different NextAuth events
   pages?: Partial<PagesOptions>;
+  /** Providers for Next Auth */
+  providers: NextAuthProviders;
 };
 type NextAuthOptions = {
   cookies?: Partial<CookiesOptions>;
@@ -57,23 +80,17 @@ export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   autoCreate: boolean;
   /** Adds ability to customize cookie options, for example, to facilitate cross-subdomain functionality */
   cookies?: Partial<CookiesOptions>;
-  /** KeystoneContext */
-  context: KeystoneContext;
   /** The key of the list to authenticate users with */
   listKey: GeneratedListTypes['key'];
   /** The path of the field the identity is stored in; must be text-ish */
   identityField: GeneratedListTypes['fields'];
   /** Path for Keystone interface */
   keystonePath?: string;
-  // Custom pages for different NextAuth events
-  pages?: Partial<PagesOptions>;
-  /** Providers for Next Auth */
-  providers: NextAuthProviders;
   /** Session data population */
   sessionData?: string | undefined;
   /** Next-Auth Session Secret */
   sessionSecret: string;
-} & OAuthCallbacks;
+} & OAuthCallbacks & KeystoneOAuthOptions;
 
 export type AuthTokenRequestErrorCode =
   | 'IDENTITY_NOT_FOUND'

@@ -47,8 +47,8 @@ const auth = createAuth({
 });
 
 export default auth.withAuth(
+  // @ts-ignore
   config({
-    // @ts-ignore
     server: {
       cors: {
         origin: [process.env.FRONTEND || 'http://localhost:7777'],
@@ -66,7 +66,7 @@ export default auth.withAuth(
       isAccessAllowed: (context: KeystoneContext) => !!context.session?.data,
       publicPages: ['/admin/auth/signin', '/admin/auth/error'],
       getAdditionalFiles: [
-        async (config: KeystoneConfig) => 
+        async (config: any) => 
         [
           {
             mode: 'copy',
