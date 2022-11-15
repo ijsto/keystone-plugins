@@ -1,16 +1,21 @@
+import { getContext } from '@keystone-6/core/context';
 import getNextAuthPage from 'keystone-6-oauth/pages/NextAuthPage';
-import { nextAuthProviders as Providers } from 'keystone-6-oauth';
+import keystoneConfig from '../../../../../keystone';
+import * as PrismaModule from '.prisma/client';
+
+const keystoneContext = global.keystoneContext || getContext(keystoneConfig, PrismaModule);
+
+if (process.env.NODE_ENV !== 'production') globalThis.keystoneContext = keystoneContext
 
 export default getNextAuthPage({
-        identityField: '<%= identityField %>',
-        mutationName: '<%= gqlNames.authenticateItemWithPassword %>',
-        providers:[ <% providers.forEach(provider => { %>
-            Providers.<%= provider.name %>({
-                <% const providerConf = provider.config;
-                for (const key in providerConf) { %>
-                    <%= key %>: '<%= providerConf[key] %>',
-                <%}%>
-                }),
-        <% }) %>
-        ],
-    });
+    autoCreate: <%= autoCreate %>,
+    context: keystoneContext,
+    identityField: '<%= identityField %>',
+    listKey: '<%= listKey %>',
+    onSignIn: keystoneConfig.onSignIn,
+    onSignUp: keystoneConfig.onSignUp,
+    pages: keystoneConfig.pages,
+    providers: keystoneConfig.providers,
+    sessionData: '<%= sessionData %>',
+    sessionSecret: '<%= sessionSecret %>',
+});
