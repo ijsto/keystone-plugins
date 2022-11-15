@@ -1,83 +1,71 @@
 import type { ServerResponse, IncomingMessage } from 'http';
-// TODO: Review this type - why "Cannot find module 'next/server'"?
-// @ts-ignore
+
+import type {
+  CookiesOptions,
+  EventCallbacks,
+  PagesOptions,
+} from 'next-auth';
+import type { Provider } from 'next-auth/providers';
+import type { JWTOptions } from 'next-auth/jwt';
+
 import type { NextRequest } from 'next/server';
-import { Provider } from 'next-auth/providers';
-import { CookiesOptions, PagesOptions } from 'next-auth';
-import {
+
+import type {
   BaseListTypeInfo,
   KeystoneConfig,
   CreateContext,
   KeystoneContext,
 } from '@keystone-6/core/types';
 
-export type OAuthCallbacks = {
-  // TODO: Review definition of this type
-  // eslint-disable-next-line no-unused-vars
-  onSignIn?: (args: {
-    account: any;
-    profile: any;
-    context: KeystoneContext;
-    user: any;
-  }) => Promise<void>;
-  // TODO: Review definition of this type
-  // eslint-disable-next-line no-unused-vars
-  onSignUp?: (args: {
-    account: any;
-    created?: any;
-    profile: any;
-    context: KeystoneContext;
-    user: any;
-  }) => Promise<void>;
+type NextAuthResponse = IncomingMessage & NextRequest;
+
+export type KeystoneOAuthOnSignIn = {
+  account: any;
+  profile: any;
+  context: KeystoneContext;
+  user: any;
+};
+export type KeystoneOAuthOnSignUp = {
+  account: any;
+  created?: any;
+  profile: any;
+  context: KeystoneContext;
+  user: any;
 };
 
-type NextAuthResponse = IncomingMessage & NextRequest;
+export type KeystoneOAuthCallbacks = {
+  onSignIn?: (args: KeystoneOAuthOnSignIn) => Promise<boolean>;
+  onSignUp?: (args: KeystoneOAuthOnSignUp) => Promise<boolean>;
+};
 
 export type NextAuthTemplateProps = {
   autoCreate: boolean;
+  context?: KeystoneContext;
   identityField: string;
   listKey: string;
   sessionData: string | undefined;
   sessionSecret: string;
 };
 
-export type OAuthCallbacks = {
-  // TODO: Review definition of this type
-  // eslint-disable-next-line no-unused-vars
-  onSignIn?: (args: {
-    account: any;
-    profile: any;
-    context: KeystoneContext;
-    user: any;
-  }) => Promise<void>;
-  // TODO: Review definition of this type
-  // eslint-disable-next-line no-unused-vars
-  onSignUp?: (args: {
-    account: any;
-    created?: any;
-    profile: any;
-    context: KeystoneContext;
-    user: any;
-  }) => Promise<void>;
-};
+export type KeystoneOAuth = {
+  cookies?: Partial<CookiesOptions>;
+  events?: Partial<EventCallbacks>;
+  jwt?: Partial<JWTOptions>;
+  pages?: Partial<PagesOptions>;
+  providers: Provider[];
+} & KeystoneOAuthCallbacks & NextAuthTemplateProps;
 
 export declare type AuthSessionStrategy<StoredSessionData> = {
-  // TODO: Review definition
-  // eslint-disable-next-line no-unused-vars
   start: (args: {
     res: ServerResponse;
     data: any;
     createContext: CreateContext;
   }) => Promise<string>;
-  // TODO: Review definition
-  // eslint-disable-next-line no-unused-vars
   end: (args: {
     req: IncomingMessage;
     res: ServerResponse;
     createContext: CreateContext;
   }) => Promise<void>;
-  // TODO: Review definition
-  // eslint-disable-next-line no-unused-vars
   get: (args: {
     req: NextAuthResponse;
     createContext: CreateContext;
@@ -88,15 +76,16 @@ export type NextAuthProviders = Provider[];
 
 type KeystoneOAuthOptions = {
   /** KeystoneContext */
-  context: KeystoneContext;
+  context?: KeystoneContext;
   // Custom pages for different NextAuth events
   pages?: Partial<PagesOptions>;
   /** Providers for Next Auth */
   providers: NextAuthProviders;
 };
+
 type NextAuthOptions = {
   cookies?: Partial<CookiesOptions>;
-} & OAuthCallbacks;
+} & KeystoneOAuthCallbacks;
 
 export type KeystoneOAuthConfig = KeystoneConfig &
   KeystoneOAuthOptions &
@@ -117,7 +106,7 @@ export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   sessionData?: string | undefined;
   /** Next-Auth Session Secret */
   sessionSecret: string;
-} & OAuthCallbacks & KeystoneOAuthOptions;
+} & KeystoneOAuthCallbacks & KeystoneOAuthOptions;
 
 export type AuthTokenRequestErrorCode =
   | 'IDENTITY_NOT_FOUND'
