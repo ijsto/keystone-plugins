@@ -34,8 +34,8 @@ export type KeystoneOAuthOnSignUp = {
 };
 
 export type KeystoneOAuthCallbacks = {
-  onSignIn?: (args: KeystoneOAuthOnSignIn) => Promise<void>;
-  onSignUp?: (args: KeystoneOAuthOnSignUp) => Promise<void>;
+  onSignIn?: (args: KeystoneOAuthOnSignIn) => Promise<boolean>;
+  onSignUp?: (args: KeystoneOAuthOnSignUp) => Promise<boolean>;
 };
 
 export type NextAuthTemplateProps = {
@@ -53,29 +53,19 @@ export type KeystoneOAuth = {
   jwt?: Partial<JWTOptions>;
   pages?: Partial<PagesOptions>;
   providers: Provider[];
-} & NextAuthTemplateProps & KeystoneOAuthCallbacks;
-
-export type NextAuthPageProps = KeystoneOAuth & {
-  context?: KeystoneContext;
-};
+} & KeystoneOAuthCallbacks & NextAuthTemplateProps;
 
 export declare type AuthSessionStrategy<StoredSessionData> = {
-  // TODO: Review definition
-  // eslint-disable-next-line no-unused-vars
   start: (args: {
     res: ServerResponse;
     data: any;
     createContext: CreateContext;
   }) => Promise<string>;
-  // TODO: Review definition
-  // eslint-disable-next-line no-unused-vars
   end: (args: {
     req: IncomingMessage;
     res: ServerResponse;
     createContext: CreateContext;
   }) => Promise<void>;
-  // TODO: Review definition
-  // eslint-disable-next-line no-unused-vars
   get: (args: {
     req: NextAuthResponse;
     createContext: CreateContext;

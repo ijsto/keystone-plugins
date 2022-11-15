@@ -1,9 +1,9 @@
 import NextAuth from 'next-auth';
 
 import { validateNextAuth } from '../lib/validateNextAuth';
-import { NextAuthPageProps } from '../types';
+import { KeystoneOAuth } from '../types';
 
-export default function NextAuthPage(props: NextAuthPageProps) {
+export default function NextAuthPage(props: KeystoneOAuth) {
   const {
     autoCreate,
     cookies,
@@ -159,5 +159,5 @@ export default function NextAuthPage(props: NextAuthPageProps) {
   });
 }
 
-export const getNextAuthPage = (props: NextAuthPageProps) => () =>
+export const getNextAuthPage = (props: KeystoneOAuth) => () =>
   NextAuthPage({ ...props });
