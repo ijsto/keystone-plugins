@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.5.2
+
+### Patch Changes
+
+- 57f7312: Version
+
 ## 0.5.1
 
 ### Patch Changes
