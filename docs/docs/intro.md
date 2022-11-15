@@ -20,7 +20,7 @@ Easily add third-party authentication providers to your Keystone6 app. Under the
 - designed to work with any OAuth service, it supports OAuth 1.0, 1.0A, 2.0 and OpenID Connect (same as NextAuth)
 - built-in support for many popular sign-in services
 - supports email / passwordless authentication
-- supports customization and provides ability to manipulate what is stored in the database via `resolver` function.
+- supports `onSignUp` and `onSignIn` hooks for your custom logic.
 
 ## Accessible and open source
 - see Recipes for examples of how to use it in different scenarios

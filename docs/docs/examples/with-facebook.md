@@ -15,11 +15,8 @@ Modify the `withAuth°:
 ```js showLineNumbers title="keystone.js"
   const auth = createAuth({
     // ...
-    resolver: async (props: any) => {
-      const username = props.user.name as string;
-      const email = props.user.email as string;
-
-      return { email, username };
+    onSignIn: async (props: any) => {
+      return true;
     },
       // ...
   });

@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Options
+# Configuration
 
 ## ENV_VARS
 
@@ -22,40 +22,6 @@ With the recommended configuration of Keystone, NextAuth.js this should be your 
 
 `NEXTAUTH_URL="http://localhost:3000/admin/api/auth"`
 
-## autoCreate
-- Default value: `false`
-- Required: No
+# Configuration Options
 
-### Description
-
-Coming soon.
-<!-- TODO: @borisno2 -->
-
-## onSignIn
-- Default value: `undefined`
-- Required: No
-
-## onSignUp
-- Default value: `undefined`
-- Required: No
-
-## pages
-- Default value: {}
-- Required: No
-
-### Description
-Specify URLs to be used if you want to create custom sign in, sign out and error pages.
-
-Pages specified will override the corresponding built-in page.
-
-For example:
-
-```javascript title="keystone.js" showLineNumbers
-  pages: {
-    signIn: '/auth/signin',
-    signOut: '/auth/signout',
-    error: '/auth/error', // Error code passed in query string as ?error=
-    verifyRequest: '/auth/verify-request', // (used for check email message)
-    newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
-  }
-```
+Please refer to the [Core API](/docs/api-reference/core) for a full list of configuration options.

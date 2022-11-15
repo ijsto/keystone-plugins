@@ -90,24 +90,30 @@ if (!sessionSecret) {
 }
 
 const auth = createAuth({
+    autoCreate: true,
     listKey: 'User',
     identityField: 'subjectId',
-    sessionData: `id name email`,
-    autoCreate: true,
-    resolver: async (props: any) => {
+    keystonePath: '/admin',
+    onSignIn: async (props: any) => {
+        // Log user sign in
+
+        // Boolean to allow sign in. If returned false user will not be logged in.
+        return true;
+    },
+    onSignUp: async (props: any) => {
         const username = props.user.name as string;
         const email = props.user.email as string;
 
         return { email, username };
     },
-    keystonePath: '/admin',
-    sessionSecret,
     providers: [
         FacebookProvider({
             clientId: process.env.FACEBOOK_CLIENT_ID || "NextAuthClientID",
             clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "NextAuthClientSecret",
         }),
     ]
+    sessionData: `id name email`,
+    sessionSecret,
 });
 ```
 
