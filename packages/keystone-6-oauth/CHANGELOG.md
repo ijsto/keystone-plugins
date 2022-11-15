@@ -1,5 +1,12 @@
 # keystone-6-oauth
 
+## 0.5.4
+
+### Patch Changes
+
+- b70194c: add back pages/NextAuthPage
+- 96abaf5: SA/Patch/Pages entry file ref path
+
 ## 0.5.3
 
 ### Patch Changes
