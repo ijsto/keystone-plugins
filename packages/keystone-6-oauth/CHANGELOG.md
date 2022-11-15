@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.5.7
+
+### Patch Changes
+
+- fd3daf2: patch KeystoneOAuthOnSignUpResponse
+
 ## 0.5.6
 
 ### Patch Changes
