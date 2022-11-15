@@ -9,15 +9,7 @@ import { Provider } from 'next-auth/providers';
 import { JWTOptions } from 'next-auth/jwt';
 import { validateNextAuth } from '../lib/validateNextAuth';
 
-import { OAuthCallbacks } from '../types';
-
-export type NextAuthTemplateProps = {
-  autoCreate: boolean;
-  identityField: string;
-  listKey: string;
-  sessionData: string | undefined;
-  sessionSecret: string;
-};
+import { NextAuthTemplateProps, OAuthCallbacks } from '../types';
 
 export type CoreNextAuthPageProps = {
   cookies?: Partial<CookiesOptions>;

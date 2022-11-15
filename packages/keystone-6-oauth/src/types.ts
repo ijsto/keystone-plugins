@@ -11,7 +11,6 @@ import {
   KeystoneContext,
 } from '@keystone-6/core/types';
 
-
 export type OAuthCallbacks = {
   // TODO: Review definition of this type
   // eslint-disable-next-line no-unused-vars
@@ -33,6 +32,34 @@ export type OAuthCallbacks = {
 };
 
 type NextAuthResponse = IncomingMessage & NextRequest;
+
+export type NextAuthTemplateProps = {
+  autoCreate: boolean;
+  identityField: string;
+  listKey: string;
+  sessionData: string | undefined;
+  sessionSecret: string;
+};
+
+export type OAuthCallbacks = {
+  // TODO: Review definition of this type
+  // eslint-disable-next-line no-unused-vars
+  onSignIn?: (args: {
+    account: any;
+    profile: any;
+    context: KeystoneContext;
+    user: any;
+  }) => Promise<void>;
+  // TODO: Review definition of this type
+  // eslint-disable-next-line no-unused-vars
+  onSignUp?: (args: {
+    account: any;
+    created?: any;
+    profile: any;
+    context: KeystoneContext;
+    user: any;
+  }) => Promise<void>;
+};
 
 export declare type AuthSessionStrategy<StoredSessionData> = {
   // TODO: Review definition
