@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.5.3
+
+### Patch Changes
+
+- ac9bb87: chore - add todo + trigger V
+
 ## 0.5.2
 
 ### Patch Changes
