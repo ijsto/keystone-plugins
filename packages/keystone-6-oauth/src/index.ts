@@ -9,7 +9,7 @@ import {
   SessionStrategy,
 } from '@keystone-6/core/types';
 import { getSession } from 'next-auth/react';
-import { getToken } from 'next-auth/jwt';
+import { getToken, JWT } from 'next-auth/jwt';
 import { Provider } from 'next-auth/providers';
 
 import * as cookie from 'cookie';
@@ -31,6 +31,7 @@ import { authTemplate } from './templates/auth';
 export type { NextAuthProviders, KeystoneOAuthConfig } from './types';
 export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   autoCreate,
+  context,
   cookies,
   identityField,
   listKey,
@@ -38,7 +39,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   onSignIn,
   onSignUp,
   pages,
-  resolver,
   providers,
   sessionData,
   sessionSecret,
@@ -59,7 +59,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
    *  - to the init page when initFirstItem is configured, and there are no user in the database
    *  - to the signin page when no valid session is present
    */
-  // TODO: Check pageMiddleware types
+  // TODO: [TYPES] Check pageMiddleware
   const pageMiddleware: AdminUIConfig<BaseKeystoneTypeInfo>['pageMiddleware'] =
     async ({ context, isValidSession }) => {
       const { req, session } = context;
@@ -139,7 +139,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     `${customPath}/api/auth/signout`,
     `${customPath}/api/auth/error`,
   ];
-  // TODO: Add Provider Types
+  // TODO: [TYPES] Add Provider
   // @ts-ignore
   function addPages(provider: Provider) {
     const name = provider.id;
@@ -217,7 +217,13 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
       },
       get: async ({ req, createContext }) => {
         const pathname = url.parse(req?.url!).pathname!;
-        let nextSession: Session;
+        // TODO 
+        let nextSession: JWT | Session & {
+          listKey: string;
+          itemId: string;
+          data: any;
+        } | null = null;
+
         if (pathname.includes('/api/auth')) {
           return null;
         }
@@ -227,9 +233,9 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           nextSession = (await getToken({
             req,
             secret: sessionSecret,
-          })) as Session;
+          }));
         } else {
-          nextSession = (await getSession({ req })) as Session;
+          nextSession = (await getSession({ req })) as any; // TODO: [TYPES] Review nextSession
         }
 
         if (
@@ -322,10 +328,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     const existingExtendGraphQLSchema = keystoneConfig.extendGraphqlSchema;
     return {
       ...keystoneConfig,
+      context,
       cookies,
-      experimental: {
-        ...keystoneConfig.experimental,
-      },
       extendGraphqlSchema: existingExtendGraphQLSchema
         ? schema => existingExtendGraphQLSchema(extendGraphqlSchema(schema))
         : extendGraphqlSchema,
@@ -336,7 +340,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
       onSignUp,
       pages,
       providers,
-      resolver,
       session,
       ui,
     };

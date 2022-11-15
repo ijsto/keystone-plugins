@@ -2,23 +2,24 @@ import ejs from 'ejs';
 import { NextAuthTemplateProps } from '../pages/NextAuthPage';
 
 const template = `
+import { getContext } from '@keystone-6/core/context';
 import getNextAuthPage from 'keystone-6-oauth/pages/NextAuthPage';
 import keystoneConfig from '../../../../../keystone';
-import { PrismaClient } from '.prisma/client';
-import { createQueryAPI } from '@keystone-6/core/___internal-do-not-use-will-break-in-patch/node-api';
+import * as PrismaModule from '.prisma/client';
 
-const keystoneQueryAPI = global.keystoneQueryAPI || createQueryAPI(keystoneConfig, PrismaClient);
+const keystoneContext = global.keystoneContext || getContext(keystoneConfig, PrismaModule);
 
-if (process.env.NODE_ENV !== 'production') globalThis.keystoneQueryAPI = keystoneQueryAPI
+if (process.env.NODE_ENV !== 'production') globalThis.keystoneContext = keystoneContext
 
 export default getNextAuthPage({
         autoCreate: <%= autoCreate %>,
+        context: keystoneContext,
         identityField: '<%= identityField %>',
         listKey: '<%= listKey %>',
+        onSignIn: keystoneConfig.onSignIn,
+        onSignUp: keystoneConfig.onSignUp,
         pages: keystoneConfig.pages,
         providers: keystoneConfig.providers,
-        query: keystoneQueryAPI,
-        resolver: keystoneConfig.resolver,
         sessionData: '<%= sessionData %>',
         sessionSecret: '<%= sessionSecret %>',
     });
