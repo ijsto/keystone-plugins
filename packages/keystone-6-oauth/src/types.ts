@@ -33,9 +33,13 @@ export type KeystoneOAuthOnSignUp = {
   user: any;
 };
 
+export interface KeystoneOAuthOnSignUpResponse {
+  [key: string]: any;
+}
+
 export type KeystoneOAuthCallbacks = {
   onSignIn?: (args: KeystoneOAuthOnSignIn) => Promise<boolean>;
-  onSignUp?: (args: KeystoneOAuthOnSignUp) => Promise<boolean>;
+  onSignUp?: (args: KeystoneOAuthOnSignUp) => Promise<KeystoneOAuthOnSignUpResponse>;
 };
 
 export type NextAuthTemplateProps = {
