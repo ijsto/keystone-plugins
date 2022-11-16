@@ -1,10 +1,6 @@
----
-sidebar_position: 2
----
-
 # Pages
 
-Keystone6-OAuth automatically creates simple (from [NextAuth.js](https://next-auth.js.org/configuration/pages)), unbranded authentication pages for handling Sign in, Sign out, Email Verification and displaying error messages.
+`keystone-6-oauth` automatically creates simple, unbranded authentication pages for handling Sign in, Sign out, Email Verification and displaying error messages. This is the same behavior as [NextAuth.js](https://next-auth.js.org/configuration/pages).
 
 The options displayed on the sign-up page are automatically generated based on the providers specified in the options passed to NextAuth.js.
 

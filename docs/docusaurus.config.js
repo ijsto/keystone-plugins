@@ -72,9 +72,9 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'api-reference/core',
             position: 'left',
-            label: 'Docs',
+            label: 'API',
           },
           { to: 'https://ijs.to/blog', label: 'Blog', position: 'left' },
           {

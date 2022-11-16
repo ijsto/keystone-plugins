@@ -36,10 +36,10 @@ This package is only possible because of:
 
 Check out the Getting Started for installation and usage.
 
-:::warning
+:::caution Please note
 
-Please note: this documentation is currently in its very infancy.
+This documentation is very new and some parts may be missing. We welcome your feedback, requests, or contributions.
 
-For updates follow [@scottagirs](https://twitter.com/scottagirs), [Josh Calder](https://twitter.com/OpenSaasAU) or [@ijsto](https://twitter.com/ijstodev) on Twitter.
+For updates follow [@scottagirs](https://ijs.to/@scottagirs), [Josh Calder](https://twitter.com/OpenSaasAU) or [@ijsto](https://twitter.com/ijstodev) on Twitter.
 
 :::

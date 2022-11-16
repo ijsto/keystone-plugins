@@ -1,8 +1,6 @@
----
-sidebar_position: 2
----
+# Overview
 
-# Configuration
+Before you can use the `keystone-6-oauth`, you need to configure it. Below are the options that you will need to configure.
 
 ## ENV_VARS
 

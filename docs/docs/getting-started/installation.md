@@ -4,12 +4,6 @@ sidebar_position: 2
 
 # Keystone6 setup
 
-:::tip Please note
-
-You will need Keystone6 `v3.0.0` or higher to use this plugin.
-
-:::
-
 ## Installation
 
 

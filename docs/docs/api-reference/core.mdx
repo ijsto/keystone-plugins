@@ -8,7 +8,7 @@ import { ApiOption } from '@site/src/components/ApiOption';
 
 In this document you can find more information on each of the configuration options available in `createAuth()` method.
 
-## <ApiOption optional usage="/docs/category/configuration">createAuth()</ApiOption>
+## <ApiOption optional type="function" usage="/docs/category/configuration">createAuth()</ApiOption>
 
 The `createAuth()` function is used to create an instance of the Auth module. It accepts an object with configuration properties. You can see below the a full list.
 
@@ -36,6 +36,9 @@ Path to your Keystone admin panel.
 --- 
 
 ### <ApiOption usage="/docs/category/configuration">listKey</ApiOption>
+
+Name of the Keystone List that will be used to store the Authenticated Item. For example, "User".
+
 --- 
 
 ### <ApiOption optional type="async function">onSignIn</ApiOption>
@@ -83,7 +86,7 @@ String used to encrypt your users' sessions.
 
 ### <ApiOption optional type="Keystone options">...rest</ApiOption>
 
-Since `createAuth()` is a wrapper, you can pass any Keystone options to it. For more information, please refer to [Keystone auth options](https://keystonejs.com/docs/guides/auth-and-access-control#configure-authentication).
+Since `createAuth()` is a wrapper, so - it accepts all Keystone options too. For more information, refer to [Keystone auth options](https://keystonejs.com/docs/guides/auth-and-access-control#configure-authentication).
 
 
 <!-- TODO: Add more info -->
