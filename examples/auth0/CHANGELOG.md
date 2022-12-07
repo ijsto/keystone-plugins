@@ -1,5 +1,12 @@
 # keystone-6-oauth-auth0-example
 
+## 0.2.3
+
+### Patch Changes
+
+- Updated dependencies [01933fd]
+  - keystone-6-oauth@1.0.0
+
 ## 0.2.2
 
 ### Patch Changes

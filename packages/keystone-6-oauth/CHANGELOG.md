@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 1.0.0
+
+### Major Changes
+
+- 01933fd: Tested only for V3
+
 ## 0.5.10
 
 ### Patch Changes
