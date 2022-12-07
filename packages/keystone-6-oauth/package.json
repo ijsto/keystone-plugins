@@ -13,8 +13,8 @@
   "main": "dist/keystone-6-oauth.cjs.js",
   "module": "dist/keystone-6-oauth.esm.js",
   "dependencies": {
-    "@babel/runtime": "^7.20.1",
-    "@babel/runtime-corejs3": "^7.20.1",
+    "@babel/runtime": "^7.20.6",
+    "@babel/runtime-corejs3": "^7.20.6",
     "@types/ejs": "^3.1.1",
     "cookie": "^0.5.0",
     "cross-fetch": "^3.1.5",
@@ -23,12 +23,12 @@
     "next-auth": "^4.16.4"
   },
   "devDependencies": {
-    "@keystone-6/core": "^3.0.2",
+    "@keystone-6/core": "^4.0.0",
     "react": "^18.2.0",
     "turbo": "^1.6.3"
   },
   "peerDependencies": {
-    "@keystone-6/core": "^3.0.2",
+    "@keystone-6/core": "^4.0.0",
     "react": "^18.2.0"
   },
   "engines": {
