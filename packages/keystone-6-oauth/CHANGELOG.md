@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 4.0.1
+
+### Patch Changes
+
+- 58fb93a: update KS & next-auth@latest
+
 ## 4.0.0
 
 ### Major Changes
