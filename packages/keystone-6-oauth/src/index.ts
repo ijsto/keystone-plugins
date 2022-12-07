@@ -10,6 +10,8 @@ import {
 
 import * as cookie from 'cookie';
 
+import type { NextApiRequest } from 'next';
+
 import { Session } from 'next-auth';
 import { getSession } from 'next-auth/react';
 import { getToken, JWT } from 'next-auth/jwt';
@@ -190,12 +192,16 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     const { get, end, ...sessionStrategy } = _sessionStrategy;
     return {
       ...sessionStrategy,
-      end: async ({ res, req, createContext }) => {
-        await end({ createContext, req, res });
+      end: async ({ context }) => {
+        await end({ context });
         const TOKEN_NAME =
           process.env.NODE_ENV === 'production'
             ? '__Secure-next-auth.session-token'
             : 'next-auth.session-token';
+
+        const { req, res } = context;
+        if (!req || !res) return;
+
         res.setHeader(
           'Set-Cookie',
           cookie.serialize(TOKEN_NAME, '', {
@@ -212,7 +218,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
       },
       // TODO: [TYPES] Add get typing
       // @ts-ignore
-      get: async ({ req, createContext }) => {
+      get: async ({ context }) => {
+        const { req } = context;
         const pathname = url.parse(req?.url!).pathname!;
         // TODO 
         let nextSession: JWT | Session & {
@@ -221,14 +228,16 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           data: any;
         } | null = null;
 
+        if (!req) return;
         if (pathname.includes('/api/auth')) {
           return null;
         }
-        const sudoContext = createContext({ sudo: true });
+
+        const sudoContext = context.sudo();
 
         if (req.headers?.authorization?.split(' ')[0] === 'Bearer') {
           nextSession = (await getToken({
-            req,
+            req: req as NextApiRequest,
             secret: sessionSecret,
           }));
         } else {
@@ -252,7 +261,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           listKey: nextSession.listKey,
         };
 
-        const userSession = await get({ createContext, req: reqWithUser });
+        const userSession = await get({ context });
 
         return {
           ...userSession,
