@@ -14,7 +14,7 @@ export const FooterSocials = () => {
   const socials = [
     {
       backgroundColor: 'rgba(234,51,36,0.25)',
-      url: 'https://www.youtube.com/channel/UCk54GuQ7ha-wvviMimD8i1w',
+      url: 'https://youtube.com/@ijsto',
     },
     {
       backgroundColor: 'rgba(42,98,217,0.25)',
@@ -34,7 +34,7 @@ export const FooterSocials = () => {
     },
     {
       backgroundColor: 'rgba(66,77,228,0.25)',
-      url: 'https://discord.gg/GrdX6jRnFH',
+      url: 'https://discord.gg/JkFBHqt8Hk',
     },
   ];
 

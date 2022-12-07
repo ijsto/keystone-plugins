@@ -14,6 +14,8 @@ export const FooterSocialLink = ({ url, backgroundColor }: Social) => {
       className='footer-social__link padding-horiz--sm padding-vert--md'
       style={{ backgroundColor }}
       href={url}
+      target='_blank'
+      rel='noreferrer noopener'
     >
       <Icon className='footer-social__icon' />
       <div className='footer-social__title'>{name}</div>
