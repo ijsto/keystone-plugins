@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.5.10
+
+### Patch Changes
+
+- ce5a633: resolve redirect loop
+
 ## 0.5.9
 
 ### Patch Changes
