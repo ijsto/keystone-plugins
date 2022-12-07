@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 4.0.0
+
+### Major Changes
+
+- 141e3bb: Conforms to Keystone6@4.0.0 + adds sudo context
+
 ## 3.0.0
 
 ### Major Changes
