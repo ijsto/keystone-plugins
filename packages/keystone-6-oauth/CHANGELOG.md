@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.5.9
+
+### Patch Changes
+
+- 43c1c0a: SA/Remove-`withAuth.isAccessAllowed`
+
 ## 0.5.8
 
 ### Patch Changes
