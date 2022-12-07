@@ -38,7 +38,10 @@ export default function NextAuthPage(props: KeystoneOAuth) {
   return NextAuth({
     callbacks: {
       async jwt({ token }) {
-        const identity = token.sub as number | string;
+        const identity = token.sub;
+        if (!identity) {
+          return token;
+        }
         const nextAuthValidationResult = await validateNextAuth(
           identityField,
           identity,
@@ -76,7 +79,7 @@ export default function NextAuthPage(props: KeystoneOAuth) {
       async session({ session, token }) {
         let returnSession = session;
         if (!token.itemId) {
-          return { expires: '0' };
+          return session;
         }
         returnSession = {
           ...session,
