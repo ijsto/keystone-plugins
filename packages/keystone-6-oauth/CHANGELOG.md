@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 3.0.0
+
+### Major Changes
+
+- e93ac67: First tested version. Earlier versions are not supported/tested.
+
 ## 2.0.0
 
 ### Major Changes
