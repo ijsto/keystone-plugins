@@ -5,6 +5,7 @@ import {
   AdminUIConfig,
   BaseKeystoneTypeInfo,
   SessionStrategy,
+  KeystoneContext,
 } from '@keystone-6/core/types';
 
 import * as cookie from 'cookie';
@@ -68,32 +69,18 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
    *  - to the signin page when no valid session is present
    */
   // TODO: [TYPES] Check pageMiddleware
-  const pageMiddleware: AdminUIConfig<BaseKeystoneTypeInfo>['pageMiddleware'] =
+  const authMiddleware: AdminUIConfig<BaseKeystoneTypeInfo>['pageMiddleware'] =
     async ({ context, isValidSession }) => {
       const { req, session } = context;
       const pathname = url.parse(req?.url!).pathname!;
 
       if (isValidSession) {
-        if (
-          pathname === `${customPath}/api/auth/signin` ||
-          (pages?.signIn && pathname.includes(pages?.signIn))
-        ) {
-          return { kind: 'redirect', to: `${customPath}` };
-        }
         if (customPath !== '' && pathname === '/') {
           return { kind: 'redirect', to: `${customPath}` };
         }
         return null;
       }
-      if (
-        pathname.includes('/_next/') ||
-        pathname.includes('/api/auth/') ||
-        (pages?.signIn && pathname.includes(pages?.signIn)) ||
-        (pages?.error && pathname.includes(pages?.error)) ||
-        (pages?.signOut && pathname.includes(pages?.signOut))
-      ) {
-        return null;
-      }
+    
       if (!session && !pathname.includes(`${customPath}/api/auth/`)) {
         return {
           kind: 'redirect',
@@ -103,14 +90,14 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     };
 
   /**
-   * getAdditionalFiles
+   * authGetAdditionalFiles
    *
    * This function adds files to be generated into the Admin UI build. Must be added to the
    * ui.getAdditionalFiles config.
    *
    * The sign-in page is always included, and the init page is included when initFirstItem is set
    */
-  const getAdditionalFiles = () => {
+  const authGetAdditionalFiles = () => {
     const filesToWrite: AdminFileToWrite[] = [
       {
         mode: 'write',
@@ -137,7 +124,7 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
    *
    * Must be added to the ui.publicPages config
    */
-  const publicPages = [
+  const authPublicPages = [
     `${customPath}/api/__keystone_api_build`,
     `${customPath}/api/auth/csrf`,
     `${customPath}/api/auth/signin`,
@@ -151,8 +138,8 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   // @ts-ignore
   function addPages(provider: Provider) {
     const name = provider.id;
-    publicPages.push(`${customPath}/api/auth/signin/${name}`);
-    publicPages.push(`${customPath}/api/auth/callback/${name}`);
+    authPublicPages.push(`${customPath}/api/auth/signin/${name}`);
+    authPublicPages.push(`${customPath}/api/auth/callback/${name}`);
   }
   providers.map(addPages);
 
@@ -278,6 +265,10 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
     };
   };
 
+  function defaultIsAccessAllowed({ session }: KeystoneContext) {
+    return session !== undefined;
+  }
+
   /**
    * withAuth
    *
@@ -291,19 +282,40 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
   const withAuth = (keystoneConfig: KeystoneConfig): KeystoneOAuthConfig => {
     validateConfig(keystoneConfig);
     let { ui } = keystoneConfig;
-    if (keystoneConfig.ui) {
+    
+    if (!ui?.isDisabled) {
+      const {
+        getAdditionalFiles = [],
+        isAccessAllowed = defaultIsAccessAllowed,
+        pageMiddleware,
+        publicPages = [],
+      } = ui || {};
       ui = {
-        ...keystoneConfig.ui,
-        getAdditionalFiles: [
-          ...(keystoneConfig.ui?.getAdditionalFiles || []),
-          getAdditionalFiles,
-        ],
-        pageMiddleware: async args =>
-          // TODO: Review - do we need to check and throw Error if pageMiddleware is undefined?
-          (pageMiddleware && (await pageMiddleware(args))) ??
-          keystoneConfig?.ui?.pageMiddleware?.(args),
-        publicPages: [...(keystoneConfig.ui.publicPages || []), ...publicPages],
-      };
+        ...ui,
+        publicPages: [...publicPages, ...authPublicPages],
+        isAccessAllowed: async (context: KeystoneContext) => {
+          const pathname = url.parse(context.req?.url!).pathname!;
+          if (
+            pathname.startsWith(`${customPath}/_next`) ||
+            pathname.startsWith(`${customPath}/__next`) ||
+            pathname.startsWith(`${customPath}/api/auth/`) ||
+            (pages?.signIn && pathname.includes(pages?.signIn)) ||
+            (pages?.error && pathname.includes(pages?.error)) ||
+            (pages?.signOut && pathname.includes(pages?.signOut))
+          ) {
+            return true;
+          }
+          return await isAccessAllowed(context);
+        },
+        getAdditionalFiles: [...getAdditionalFiles, authGetAdditionalFiles],
+        pageMiddleware: async args => {
+          if (!authMiddleware) throw new Error('Missing authMiddleware');
+
+          const shouldRedirect = await authMiddleware(args);
+          if (shouldRedirect) return shouldRedirect;
+          return pageMiddleware?.(args);
+        },
+      }
     }
 
     if (!keystoneConfig.session)
