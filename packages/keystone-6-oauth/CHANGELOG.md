@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 2.0.0
+
+### Major Changes
+
+- 810ce21: Tested only for V3
+
 ## 1.0.0
 
 ### Major Changes
