@@ -2,7 +2,6 @@ import {
   AdminFileToWrite,
   BaseListTypeInfo,
   KeystoneConfig,
-  KeystoneContext,
   AdminUIConfig,
   BaseKeystoneTypeInfo,
   SessionStrategy,
@@ -299,29 +298,6 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
           ...(keystoneConfig.ui?.getAdditionalFiles || []),
           getAdditionalFiles,
         ],
-        isAccessAllowed: async (context: KeystoneContext) => {
-          const { req } = context;
-          const pathname = url.parse(req?.url!).pathname!;
-
-          // Allow nextjs scripts and static files to be accessed without auth
-          if (pathname.includes('/_next/')) {
-            return true;
-          }
-
-          // Allow keystone to access /api/__keystone_api_build for hot reloading
-          if (
-            process.env.NODE_ENV !== 'production' &&
-            context.req?.url !== undefined &&
-            new URL(context.req.url, 'http://example.com').pathname ===
-              `${customPath}/api/__keystone_api_build`
-          ) {
-            return true;
-          }
-
-          return keystoneConfig.ui?.isAccessAllowed
-            ? keystoneConfig.ui.isAccessAllowed(context)
-            : context.session !== undefined;
-        },
         pageMiddleware: async args =>
           // TODO: Review - do we need to check and throw Error if pageMiddleware is undefined?
           (pageMiddleware && (await pageMiddleware(args))) ??
