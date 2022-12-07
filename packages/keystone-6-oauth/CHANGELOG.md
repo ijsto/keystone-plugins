@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 0.5.8
+
+### Patch Changes
+
+- a59e80c: chore update identity return and docs link
+
 ## 0.5.7
 
 ### Patch Changes
