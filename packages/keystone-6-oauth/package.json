@@ -1,6 +1,6 @@
 {
   "name": "keystone-6-oauth",
-  "version": "0.5.10",
+  "version": "1.0.0",
   "homepage": "https://keystone-oauth.vercel.app",
   "bugs": {
     "url": "https://github.com/ijsto/keystone-plugins/issues"
