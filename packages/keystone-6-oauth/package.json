@@ -23,12 +23,12 @@
     "next-auth": "^4.18.0"
   },
   "devDependencies": {
-    "@keystone-6/core": "^4.0.0",
+    "@keystone-6/core": "^4.0.1",
     "react": "^18.2.0",
     "turbo": "^1.6.3"
   },
   "peerDependencies": {
-    "@keystone-6/core": "^4.0.0",
+    "@keystone-6/core": "^4.0.1",
     "react": "^18.2.0"
   },
   "engines": {
