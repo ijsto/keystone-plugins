@@ -1,5 +1,8 @@
 {
   "name": "keystone-6-oauth",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "4.0.1",
   "homepage": "https://keystone-oauth.vercel.app",
   "bugs": {
@@ -10,8 +13,19 @@
     "url": "git+https://github.com/ijsto/keystone-plugins/tree/main/packages/keystone-6-oauth"
   },
   "license": "MIT",
+  "description": "Keystone6 Plugin that enables social logins such as Google, Twitter, Github, Facebook and others.",
   "main": "dist/keystone-6-oauth.cjs.js",
   "module": "dist/keystone-6-oauth.esm.js",
+  "engines": {
+    "node": "^14.13 || >= 16.13"
+  },
+  "preconstruct": {
+    "entrypoints": [
+      "index.ts",
+      "providers/*.ts",
+      "pages/*.tsx"
+    ]
+  },
   "dependencies": {
     "@babel/runtime": "^7.20.6",
     "@babel/runtime-corejs3": "^7.20.6",
@@ -31,17 +45,12 @@
     "@keystone-6/core": "^4.0.1",
     "react": "^18.2.0"
   },
-  "engines": {
-    "node": "^14.13 || >= 16.13"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "preconstruct": {
-    "entrypoints": [
-      "index.ts",
-      "providers/*.ts",
-      "pages/*.tsx"
-    ]
-  }
+  "keywords": [
+    "social-login",
+    "keystone-social-login",
+    "keystone-oauth",
+    "keystone",
+    "keystone6",
+    "javascript"
+  ]
 }
