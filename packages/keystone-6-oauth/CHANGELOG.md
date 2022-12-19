@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 4.0.2
+
+### Patch Changes
+
+- 3699066: Chasing the bug. More details to come, if successful.
+
 ## 4.0.1
 
 ### Patch Changes
