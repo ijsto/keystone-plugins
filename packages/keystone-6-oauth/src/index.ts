@@ -195,9 +195,9 @@ export function createAuth<GeneratedListTypes extends BaseListTypeInfo>({
       end: async ({ context }) => {
         await end({ context });
         const TOKEN_NAME =
-          process.env.NODE_ENV === 'production'
-            ? '__Secure-next-auth.session-token'
-            : 'next-auth.session-token';
+          process.env.NODE_ENV === 'development'
+            ? 'next-auth.session-token'
+            : '__Secure-next-auth.session-token';
 
         const { req, res } = context;
         if (!req || !res) return;
