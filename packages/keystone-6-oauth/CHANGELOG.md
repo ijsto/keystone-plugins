@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 4.0.3
+
+### Patch Changes
+
+- da13d87: Patches and ships signIn callback
+
 ## 4.0.2
 
 ### Patch Changes

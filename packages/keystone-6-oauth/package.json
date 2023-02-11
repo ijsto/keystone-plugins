@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "4.0.2",
+  "version": "4.0.3",
   "homepage": "https://keystone-oauth.vercel.app",
   "bugs": {
     "url": "https://github.com/ijsto/keystone-plugins/issues"
