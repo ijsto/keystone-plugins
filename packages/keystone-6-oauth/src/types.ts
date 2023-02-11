@@ -6,12 +6,13 @@ import type {
 import type { Provider } from 'next-auth/providers';
 import type { JWTOptions } from 'next-auth/jwt';
 
-import { BaseListTypeInfo, KeystoneConfig, KeystoneContext } from '@keystone-6/core/types';
+import { BaseListTypeInfo, KeystoneConfig, KeystoneContext, KeystoneDbAPI, KeystoneListsAPI } from '@keystone-6/core/types';
 
 export type KeystoneOAuthOnSignIn = {
   account: any;
   profile: any;
-  context: KeystoneContext;
+  db: KeystoneDbAPI<Record<string, BaseListTypeInfo>>;
+  query: KeystoneListsAPI<Record<string, BaseListTypeInfo>>;
   user: any;
 };
 export type KeystoneOAuthOnSignUp = {
@@ -27,7 +28,7 @@ export interface KeystoneOAuthOnSignUpResponse {
 }
 
 export type KeystoneOAuthCallbacks = {
-  onSignIn?: (args: KeystoneOAuthOnSignIn) => Promise<boolean>;
+  onSignIn?: (args: KeystoneOAuthOnSignIn) => Promise<boolean> | boolean;
   onSignUp?: (args: KeystoneOAuthOnSignUp) => Promise<KeystoneOAuthOnSignUpResponse>;
 };
 
@@ -85,7 +86,7 @@ export type AuthConfig<GeneratedListTypes extends BaseListTypeInfo> = {
   /** Path for Keystone interface */
   keystonePath?: string;
   /** Session data population */
-  sessionData?: string | undefined;
+  sessionData?: string;
   /** Next-Auth Session Secret */
   sessionSecret: string;
 } & KeystoneOAuthCallbacks & KeystoneOAuthOptions;

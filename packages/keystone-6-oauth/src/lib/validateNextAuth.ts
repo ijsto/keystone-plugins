@@ -6,12 +6,12 @@ export async function validateNextAuth(
   identityField: string,
   identity: string | number,
   protectIdentities: boolean,
-  itemAPI: KeystoneListsAPI<any>[string]
+  listQueryAPI: KeystoneListsAPI<any>[string]
 ): Promise<
   | { success: false; item?: any; code: NextAuthErrorCode }
   | { success: true; item: BaseItem }
 > {
-  const match = await findMatchingIdentity(identityField, identity, itemAPI);
+  const match = await findMatchingIdentity(identityField, identity, listQueryAPI);
 
   const { item } = match as {
     success: true;

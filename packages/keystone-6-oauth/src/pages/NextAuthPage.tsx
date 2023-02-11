@@ -32,7 +32,7 @@ export default function NextAuthPage(props: KeystoneOAuth) {
     return null;
   }
 
-  const list = context.query[listKey];
+  const listQueryAPI = context.query[listKey];
   const protectIdentities = true;
 
   return NextAuth({
@@ -46,7 +46,7 @@ export default function NextAuthPage(props: KeystoneOAuth) {
           identityField,
           identity,
           protectIdentities,
-          list
+          listQueryAPI
         );
 
         if (!nextAuthValidationResult.success) {
@@ -91,9 +91,7 @@ export default function NextAuthPage(props: KeystoneOAuth) {
 
         return returnSession;
       },
-      // @ts-ignore
       async signIn({ user, account, profile, ...rest }) {
-        // TODO: @borisno2 - pls review the identity logic
         let identity;
         if (typeof user.id === 'string') {
           identity = user.id;
@@ -107,7 +105,7 @@ export default function NextAuthPage(props: KeystoneOAuth) {
           identityField,
           identity,
           protectIdentities,
-          list
+          listQueryAPI
         );
 
         // Authenticated Item is not found (does not exist) - so we create a new if is `autoCreate=true`.
@@ -125,7 +123,7 @@ export default function NextAuthPage(props: KeystoneOAuth) {
             ...userProvidedSignUpFields,
           };
 
-          const createUser = await list
+          const createUser = await listQueryAPI
             .createOne({ data })
             .then(returned => ({ success: true, user: returned }))
             .catch(error => {
@@ -140,16 +138,17 @@ export default function NextAuthPage(props: KeystoneOAuth) {
         // if nextAuthValidationResult.success is true, we have an authenticated item, and we sign in with optional `onSignIn` resolver.
         if (onSignIn) {
           // TODO: Add docs that developer needs to return true or false from `onSignIn` resolver.
-          // Could have a flag in DB (eg. `disabledUser` etc) - Josh 🚀
+          // Could have a flag in DB (eg. `disabledUser` etc)
+
           return await onSignIn({
             account,
-            context,
+            db: context.db,
+            query: context.query,
             profile,
             user,
-            ...rest,
           });
         }
-
+        
         return true
       },
     },
