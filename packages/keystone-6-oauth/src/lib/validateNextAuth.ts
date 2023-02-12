@@ -5,7 +5,7 @@ import { findMatchingIdentity } from './findMatchingIdentity';
 export async function validateNextAuth(
   identityField: string,
   identity: string | number,
-  protectIdentities: boolean,
+  allowAccountLinks: boolean,
   listQueryAPI: KeystoneListsAPI<any>[string]
 ): Promise<
   | { success: false; item?: any; code: NextAuthErrorCode }
@@ -23,7 +23,8 @@ export async function validateNextAuth(
   }
 
   return {
-    code: protectIdentities ? 'FAILURE' : 'SUBJECT_NOT_FOUND',
+    // TODO: Review below to link accounts
+    code: !allowAccountLinks ? 'FAILURE' : 'SUBJECT_NOT_FOUND',
     success: false,
   };
 }
