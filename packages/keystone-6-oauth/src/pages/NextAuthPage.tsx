@@ -5,7 +5,7 @@ import { KeystoneOAuth } from '../types';
 
 export default function NextAuthPage(props: KeystoneOAuth) {
   const {
-    autoCreate,
+    autoCreate = true,
     cookies,
     events,
     identityField,
@@ -107,7 +107,7 @@ export default function NextAuthPage(props: KeystoneOAuth) {
           listQueryAPI
         );
 
-        // Authenticated Item is not found (does not exist) - so we create a new if is `autoCreate=true`.
+        // Authenticated Item is not found (does not exist) - unless the default `autoCreate=true` is overwritten.
         if (!nextAuthValidationResult.success) {
           if (!autoCreate) {
             return false;
