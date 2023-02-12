@@ -13,13 +13,16 @@ export type KeystoneOAuthOnSignIn = {
   profile: any;
   db: KeystoneDbAPI<Record<string, BaseListTypeInfo>>;
   query: KeystoneListsAPI<Record<string, BaseListTypeInfo>>;
+  session: any; // TODO: Add dynamic session
   user: any;
 };
 export type KeystoneOAuthOnSignUp = {
   account: any;
   created?: any;
   profile: any;
-  context: KeystoneContext;
+  db: KeystoneDbAPI<Record<string, BaseListTypeInfo>>;
+  query: KeystoneListsAPI<Record<string, BaseListTypeInfo>>;
+  session: any;
   user: any;
 };
 

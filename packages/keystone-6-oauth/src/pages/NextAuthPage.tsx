@@ -33,19 +33,18 @@ export default function NextAuthPage(props: KeystoneOAuth) {
   }
 
   const listQueryAPI = context.query[listKey];
-  const protectIdentities = true;
+  const allowAccountLinks = true; // TODO: Review + implement account links
 
   return NextAuth({
     callbacks: {
       async jwt({ token }) {
         const identity = token.sub;
-        if (!identity) {
-          return token;
-        }
+        if (!identity) return token;
+        
         const nextAuthValidationResult = await validateNextAuth(
           identityField,
           identity,
-          protectIdentities,
+          allowAccountLinks,
           listQueryAPI
         );
 
@@ -104,7 +103,7 @@ export default function NextAuthPage(props: KeystoneOAuth) {
         const nextAuthValidationResult = await validateNextAuth(
           identityField,
           identity,
-          protectIdentities,
+          allowAccountLinks,
           listQueryAPI
         );
 
@@ -115,7 +114,13 @@ export default function NextAuthPage(props: KeystoneOAuth) {
           }
 
           const userProvidedSignUpFields = onSignUp
-            ? await onSignUp({ account, context, profile, user, ...rest })
+            ? await onSignUp({
+                account,
+                db: context.db,
+                profile, user ,
+                query: context.query,
+                session: context.session,
+            })
             : {};
 
           const data: any = {
@@ -129,6 +134,9 @@ export default function NextAuthPage(props: KeystoneOAuth) {
             .catch(error => {
               // eslint-disable-next-line no-console
               console.error(error);
+              if (error.message.toLowerCase().includes('unique constraint')) {
+                throw new Error(`Email already in use with ${data.signUpProvider}`);
+              }
               throw new Error(error);
             });
 
@@ -143,8 +151,9 @@ export default function NextAuthPage(props: KeystoneOAuth) {
           return await onSignIn({
             account,
             db: context.db,
-            query: context.query,
             profile,
+            query: context.query,
+            session: context.session,
             user,
           });
         }
