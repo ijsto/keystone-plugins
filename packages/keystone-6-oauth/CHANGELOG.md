@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 4.0.5
+
+### Patch Changes
+
+- c627e17: enable `autoCreate` by default
+
 ## 4.0.4
 
 ### Patch Changes
