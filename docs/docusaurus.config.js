@@ -118,7 +118,7 @@ const config = {
             items: [
               {
                 label: 'Articles',
-                to: 'https://ijs.to/articles',
+                to: 'https://ijs.to/tags/keystone6',
               },
               {
                 label: 'GitHub',
