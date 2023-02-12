@@ -1,5 +1,11 @@
 # keystone-6-oauth
 
+## 4.0.4
+
+### Patch Changes
+
+- 9462273: Fix signUp hook
+
 ## 4.0.3
 
 ### Patch Changes
