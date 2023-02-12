@@ -76,7 +76,7 @@ const config = {
             position: 'left',
             label: 'API',
           },
-          { to: 'https://ijs.to/articles', label: 'Articles', position: 'left' },
+          { to: 'https://ijs.to/tags/keystone6', label: 'Articles', position: 'left' },
           {
             to: 'https://www.npmjs.com/package/keystone-6-oauth',
             label: 'npm',
