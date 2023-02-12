@@ -128,6 +128,16 @@ export default function NextAuthPage(props: KeystoneOAuth) {
             ...userProvidedSignUpFields,
           };
 
+          const findExistingUser = await listQueryAPI
+            .findOne({
+              where: { email: user.email },
+              query: 'id email signUpProvider',
+            });
+
+          if (findExistingUser) {
+            throw new Error(`Email already in use with ${findExistingUser.signUpProvider}`);
+          }
+
           const createUser = await listQueryAPI
             .createOne({ data })
             .then(returned => ({ success: true, user: returned }))
